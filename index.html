@@ -48,6 +48,18 @@ body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;back
 .topbar{display:block;text-align:center;background:#1a1a24;color:#fff;padding:12px 16px;font-size:14.5px;font-weight:700;text-decoration:none;letter-spacing:.3px;}
 .topbar:hover{background:#333;}
 .topbar span{color:#ffd27a;}
+
+.help-fab{position:fixed;right:18px;bottom:18px;z-index:9999;background:#1a1a24;color:#fff;border:none;border-radius:999px;padding:13px 22px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35);transition:transform .2s,background .2s;}
+.help-fab:hover{transform:translateY(-2px);background:#2a2a35;}
+.help-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:10000;padding:18px;}
+.help-box{background:#fff;color:#222;border-radius:16px;max-width:420px;width:100%;padding:22px;box-sizing:border-box;position:relative;direction:ltr;text-align:left;}
+.help-box h3{margin:0 0 14px;font-size:20px;}
+.help-close{position:absolute;right:12px;top:10px;background:none;border:none;font-size:24px;color:#999;cursor:pointer;}
+.help-box input,.help-box textarea{width:100%;box-sizing:border-box;margin:8px 0;padding:11px;border:1px solid #ddd;border-radius:10px;font-size:15px;font-family:inherit;}
+.help-box textarea{min-height:110px;resize:vertical;}
+.help-box .hsend{width:100%;padding:12px;border:none;border-radius:10px;background:#1a1a24;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:6px;}
+.help-box .hsend:hover{background:#2a2a35;}
+#helpDone{display:none;text-align:center;color:#1a9d55;font-weight:700;padding:10px 0;}
 </style>
 <script type="application/ld+json">
 {
@@ -90,5 +102,28 @@ const brands=[
 const g=document.getElementById('g');
 g.innerHTML=brands.map(function(b){var open=b.url?'<a class="card" style="display:block;text-decoration:none;color:inherit;" href="'+b.url+'">':'<div class="card">';var close=b.url?'</a>':'</div>';return open+'<div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div>'+(b.zh?'<div class="zh">'+b.zh+'</div>':'')+'<div class="tag">'+b.tag+'</div>'+close;}).join('');
 </script>
+
+<button class="help-fab" onclick="openHelp()">Help</button>
+<div class="help-modal" id="helpModal">
+  <div class="help-box">
+    <button class="help-close" onclick="closeHelp()">&#10005;</button>
+    <h3>Help</h3>
+    <form id="helpForm" onsubmit="sendHelp(event);return false;">
+      <input type="hidden" name="_subject" value="Help - chinamobile.uk">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="name" placeholder="Name (optional)">
+      <input type="email" name="email" placeholder="Email (optional)">
+      <textarea name="message" required placeholder="How can I help?"></textarea>
+      <button class="hsend" type="submit">Send</button>
+    </form>
+    <div id="helpDone">&#10004; Thanks! Your message has been sent.</div>
+  </div>
+</div>
+<script>
+function openHelp(){document.getElementById('helpModal').style.display='flex';}
+function closeHelp(){document.getElementById('helpModal').style.display='none';}
+async function sendHelp(e){e.preventDefault();var f=document.getElementById('helpForm');var btn=f.querySelector('.hsend');btn.textContent='Sending…';try{var r=await fetch('https://formsubmit.co/ajax/17289001@qq.com',{method:'POST',body:new FormData(f)});var d=await r.json();document.getElementById('helpForm').style.display='none';document.getElementById('helpDone').style.display='block';}catch(err){btn.textContent='Send';alert('Failed to send. Please try again.');}}
+</script>
+
 </body>
 </html>
