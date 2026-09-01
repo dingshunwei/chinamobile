@@ -70,7 +70,7 @@ body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;back
   <div class="footer">China Mobile · Showcase</div>
 <script>
 const brands=[
- {b:"#C7000B",i:"华",en:"HUAWEI",zh:"华为",tag:"Imaging · HarmonyOS"},
+ {b:"#C7000B",i:"华",en:"HUAWEI",url:"https://sldiary.com/browse.html?d=20"},
  {b:"#FF6900",i:"米",en:"Xiaomi",zh:"小米",tag:"Value · Smart Home"},
  {b:"#00A870",i:"O",en:"OPPO",zh:"欧珀",tag:"Imaging · Fast Charging"},
  {b:"#415FFF",i:"V",en:"vivo",zh:"维沃",tag:"Imaging · OriginOS"},
@@ -84,9 +84,7 @@ const brands=[
  {b:"#005BA8",i:"中",en:"ZTE",zh:"中兴",tag:"Network · Nubia"}
 ];
 const g=document.getElementById('g');
-g.innerHTML=brands.map(function(b){
- return '<div class="card"><div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div><div class="zh">'+b.zh+'</div><div class="tag">'+b.tag+'</div></div>';
-}).join('');
+g.innerHTML=brands.map(function(b){var open=b.url?'<a class="card" style="display:block;text-decoration:none;color:inherit;" href="'+b.url+'" target="_blank">':'<div class="card">';var close=b.url?'</a>':'</div>';return open+'<div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div>'+(b.zh?'<div class="zh">'+b.zh+'</div>':'')+'<div class="tag">'+b.tag+'</div>'+close;}).join('');
 </script>
 </body>
 </html>
