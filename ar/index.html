@@ -85,7 +85,7 @@ const brands=[
  {b:"#005BA8",i:"中",en:"ZTE",tag:"الشبكات · نوبيا"}
 ];
 const g=document.getElementById('g');
-g.innerHTML=brands.map(function(b){var open=b.url?'<a class="card" style="display:block;text-decoration:none;color:inherit;" href="'+b.url+'" target="_blank">':'<div class="card">';var close=b.url?'</a>':'</div>';return open+'<div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div>'+(b.zh?'<div class="zh">'+b.zh+'</div>':'')+'<div class="tag">'+b.tag+'</div>'+close;}).join('');
+g.innerHTML=brands.map(function(b){var open=b.url?'<a class="card" style="display:block;text-decoration:none;color:inherit;" href="'+b.url+'">':'<div class="card">';var close=b.url?'</a>':'</div>';return open+'<div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div>'+(b.zh?'<div class="zh">'+b.zh+'</div>':'')+'<div class="tag">'+b.tag+'</div>'+close;}).join('');
 </script>
 </body>
 </html>
