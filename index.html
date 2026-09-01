@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>手机品牌展示 · Phone Brands</title>
+<title>Chinese Phone Brands · China Mobile Showcase</title>
+<meta name="description" content="Top Chinese smartphone brands — HUAWEI, Xiaomi, OPPO, vivo, HONOR, OnePlus, realme, Meizu, Redmi, iQOO, nubia, ZTE.">
+<meta name="keywords" content="Chinese phones, brands, HUAWEI, Xiaomi, OPPO, vivo, HONOR, OnePlus, realme, Meizu, Redmi, iQOO, nubia, ZTE">
 <style>
 :root{
   --bg:#f6f7fb; --ink:#1a1a24; --ink-soft:#5b5b6b; --card:#fff; --line:#ececf3;
   --brand:#ff6a1a; --radius:18px; --shadow:0 8px 24px rgba(30,30,60,.07);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
 .hero{background:linear-gradient(135deg,#ff8a3d,#ff6a1a 55%,#e8550a);color:#fff;padding:26px 18px 22px;text-align:center;}
 .hero h1{font-size:22px;font-weight:800;letter-spacing:.5px;}
 .hero p{font-size:13.5px;opacity:.9;margin-top:6px;}
 .wrap{max-width:900px;margin:0 auto;padding:18px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 12px;text-align:center;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;}
 .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(30,30,60,.12);}
 .badge{width:64px;height:64px;border-radius:18px;display:inline-grid;place-items:center;color:#fff;font-size:26px;font-weight:800;margin-bottom:12px;box-shadow:0 6px 14px rgba(0,0,0,.12);}
@@ -26,23 +28,23 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",Arial,sans-serif;
 </style>
 </head>
 <body>
-<div class="hero"><h1>📱 手机品牌</h1><p>国产主流品牌 · Phone Brands Showcase</p></div>
+<div class="hero"><h1>📱 Chinese Phone Brands</h1><p>Top Domestic Chinese Smartphone Brands</p></div>
 <div class="wrap"><div class="grid" id="g"></div></div>
-<div class="footer">草稿 · Demo · 可替换为真实 Logo</div>
+<div class="footer">China Mobile · Showcase</div>
 <script>
 const brands=[
- {b:"#C7000B",i:"华",en:"HUAWEI",zh:"华为",tag:"影像·鸿蒙"},
- {b:"#FF6900",i:"米",en:"Xiaomi",zh:"小米",tag:"性价比·米家"},
- {b:"#00A870",i:"O",en:"OPPO",zh:"欧珀",tag:"影像·快充"},
- {b:"#415FFF",i:"V",en:"vivo",zh:"维沃",tag:"影像·OriginOS"},
- {b:"#007EFF",i:"荣",en:"HONOR",zh:"荣耀",tag:"折叠·Magic"},
- {b:"#F5010C",i:"一",en:"OnePlus",zh:"一加",tag:"旗舰·氢"},
- {b:"#FFC915",i:"R",en:"realme",zh:"真我",tag:"电竞·性价比"},
- {b:"#0084FF",i:"魅",en:"Meizu",zh:"魅族",tag:"工艺·Flyme"},
- {b:"#FF6700",i:"红",en:"Redmi",zh:"红米",tag:"性价比·金刚"},
- {b:"#1B4FE0",i:"i",en:"iQOO",zh:"iQOO",tag:"电竞·快充"},
- {b:"#E60012",i:"努",en:"nubia",zh:"努比亚",tag:"红魔·电竞"},
- {b:"#005BA8",i:"中",en:"ZTE",zh:"中兴",tag:"网络·努比亚"}
+ {b:"#C7000B",i:"华",en:"HUAWEI",zh:"华为",tag:"Imaging · HarmonyOS"},
+ {b:"#FF6900",i:"米",en:"Xiaomi",zh:"小米",tag:"Value · Smart Home"},
+ {b:"#00A870",i:"O",en:"OPPO",zh:"欧珀",tag:"Imaging · Fast Charging"},
+ {b:"#415FFF",i:"V",en:"vivo",zh:"维沃",tag:"Imaging · OriginOS"},
+ {b:"#007EFF",i:"荣",en:"HONOR",zh:"荣耀",tag:"Foldable · Magic"},
+ {b:"#F5010C",i:"一",en:"OnePlus",zh:"一加",tag:"Flagship · OxygenOS"},
+ {b:"#FFC915",i:"R",en:"realme",zh:"真我",tag:"Esports · Value"},
+ {b:"#0084FF",i:"魅",en:"Meizu",zh:"魅族",tag:"Craft · Flyme"},
+ {b:"#FF6700",i:"红",en:"Redmi",zh:"红米",tag:"Value · Durability"},
+ {b:"#1B4FE0",i:"i",en:"iQOO",zh:"iQOO",tag:"Esports · Fast Charging"},
+ {b:"#E60012",i:"努",en:"nubia",zh:"努比亚",tag:"Red Magic · Esports"},
+ {b:"#005BA8",i:"中",en:"ZTE",zh:"中兴",tag:"Network · Nubia"}
 ];
 const g=document.getElementById('g');
 g.innerHTML=brands.map(function(b){
