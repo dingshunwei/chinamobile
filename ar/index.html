@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ماركات الهواتف الصينية · China Mobile (العربية)</title>
+<meta name="description" content="أشهر ماركات الهواتف الذكية الصينية — HUAWEI، Xiaomi، OPPO، vivo، HONOR، OnePlus وغيرها.">
+<meta name="keywords" content="هواتف صينية, ماركات, HUAWEI, Xiaomi, OPPO, vivo, HONOR, OnePlus">
+<style>
+:root{
+  --bg:#f6f7fb; --ink:#1a1a24; --ink-soft:#5b5b6b; --card:#fff; --line:#ececf3;
+  --brand:#ff6a1a; --radius:18px; --shadow:0 8px 24px rgba(30,30,60,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;text-align:right;direction:rtl;-webkit-font-smoothing:antialiased;}
+.hero{background:linear-gradient(135deg,#ff8a3d,#ff6a1a 55%,#e8550a);color:#fff;padding:26px 18px 22px;text-align:center;}
+.hero h1{font-size:22px;font-weight:800;letter-spacing:.5px;}
+.hero p{font-size:13.5px;opacity:.9;margin-top:6px;}
+.wrap{max-width:900px;margin:0 auto;padding:18px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 12px;text-align:center;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(30,30,60,.12);}
+.badge{width:64px;height:64px;border-radius:18px;display:inline-grid;place-items:center;color:#fff;font-size:26px;font-weight:800;margin-bottom:12px;box-shadow:0 6px 14px rgba(0,0,0,.12);}
+.card .en{font-size:15px;font-weight:700;letter-spacing:.3px;direction:ltr;}
+.card .tag{font-size:11.5px;color:var(--ink-soft);margin-top:6px;}
+.btn{display:block;text-align:center;background:var(--brand);color:#fff;text-decoration:none;padding:14px 20px;border-radius:12px;font-size:16px;font-weight:600;margin:12px 0;transition:transform .2s,background .2s;}
+.btn:hover{background:#e8550a;transform:translateY(-1px);}
+.btn.secondary{background:var(--card);color:var(--brand);border:2px solid var(--brand);}
+.dl{max-width:760px;margin:26px auto 0;padding:0 18px;}
+.dl h2{font-size:18px;font-weight:800;text-align:center;margin-bottom:4px;}
+.dl .note{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-bottom:10px;}
+.footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin:22px 0 30px;}
+</style>
+</head>
+<body>
+<div class="hero"><h1>📱 ماركات الهواتف الصينية</h1><p>أشهر العلامات التجارية للهواتف الذكية الصينية</p></div>
+<div class="wrap"><div class="grid" id="g"></div></div>
+<div class="dl">
+  <h2>حمّل التطبيق</h2>
+  <div class="note">اقرأ اليوميات وتصفح بالجوال</div>
+  <a class="btn" href="https://sldiary.com/diary-v1.0.0.apk" download>📥 أندرويد · حمّل التطبيق</a>
+  <a class="btn secondary" href="https://sldiary.com" target="_blank">🍎 iOS · TestFlight</a>
+</div>
+<div class="footer">China Mobile · معرض</div>
+<script>
+const brands=[
+ {b:"#C7000B",i:"华",en:"HUAWEI",tag:"التصوير · HarmonyOS"},
+ {b:"#FF6900",i:"米",en:"Xiaomi",tag:"القيمة · المنزل الذكي"},
+ {b:"#00A870",i:"O",en:"OPPO",tag:"التصوير · الشحن السريع"},
+ {b:"#415FFF",i:"V",en:"vivo",tag:"التصوير · OriginOS"},
+ {b:"#007EFF",i:"荣",en:"HONOR",tag:"القابل للطي · Magic"},
+ {b:"#F5010C",i:"一",en:"OnePlus",tag:"الرائد · OxygenOS"},
+ {b:"#FFC915",i:"R",en:"realme",tag:"الرياضات الإلكترونية · القيمة"},
+ {b:"#0084FF",i:"魅",en:"Meizu",tag:"الحرفية · Flyme"},
+ {b:"#FF6700",i:"红",en:"Redmi",tag:"القيمة · المتانة"},
+ {b:"#1B4FE0",i:"i",en:"iQOO",tag:"الرياضات الإلكترونية · الشحن السريع"},
+ {b:"#E60012",i:"努",en:"nubia",tag:"ريد ماجيك · الرياضات الإلكترونية"},
+ {b:"#005BA8",i:"中",en:"ZTE",tag:"الشبكات · نوبيا"}
+];
+const g=document.getElementById('g');
+g.innerHTML=brands.map(function(b){
+ return '<div class="card"><div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div><div class="tag">'+b.tag+'</div></div>';
+}).join('');
+</script>
+</body>
+</html>
