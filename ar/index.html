@@ -21,14 +21,11 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;text-align:right;direction:rtl;-webkit-font-smoothing:antialiased;}
-.hero{background:linear-gradient(135deg,#ff8a3d,#ff6a1a 55%,#e8550a);color:#fff;padding:24px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-.hero-l{text-align:left;}
-.hero-r{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.hero .cc{background:rgba(255,255,255,.16);color:#fff;text-decoration:none;padding:9px 15px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;}
-.hero .cc:hover{background:rgba(255,255,255,.28);}
-.hero .cc span{color:#ffe0b8;font-size:12px;}
-.hero .hlp{background:#fff;color:#e8531e;border:none;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;}
+.hero{background:linear-gradient(135deg,#ff8a3d,#ff6a1a 55%,#e8550a);color:#fff;padding:26px 18px 22px;text-align:center;position:relative;}
+.hero .hlp{position:absolute;top:16px;right:16px;background:#fff;color:#e8531e;border:none;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;}
 .hero .hlp:hover{background:#ffe9d8;}
+.footer .ccf{color:#e8550a;text-decoration:none;font-weight:700;}
+.footer .ccf:hover{text-decoration:underline;}
 
 .hero h1{font-size:22px;font-weight:800;letter-spacing:.5px;}
 .hero p{font-size:13.5px;opacity:.9;margin-top:6px;}
@@ -79,7 +76,7 @@ body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;back
 </script>
 </head>
 <body>
-<div class="hero"><div class="hero-l"><h1>📱 ماركات الهواتف الصينية</h1><p>أشهر العلامات التجارية للهواتف الذكية الصينية</p></div><div class="hero-r"><a class="cc" href="https://chinacar.bid" target="_blank">🚗 China Car <span>chinacar.bid</span></a><button class="hlp" onclick="openHelp()">Help</button></div></div>
+<div class="hero"><button class="hlp" onclick="openHelp()">Help</button><h1>📱 ماركات الهواتف الصينية</h1><p>أشهر العلامات التجارية للهواتف الذكية الصينية</p></div>
 <div class="wrap"><div class="grid" id="g"></div></div>
 <div class="dl">
   <h2>حمّل التطبيق</h2>
@@ -87,7 +84,7 @@ body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;back
   <a class="btn" href="https://sldiary.com/diary-v1.0.0.apk" download>📥 أندرويد · حمّل التطبيق</a>
   <a class="btn secondary" href="https://sldiary.com" target="_blank">🍎 iOS · TestFlight</a>
 </div>
-  <div class="footer">China Mobile · معرض</div>
+  <div class="footer">China Mobile · معرض · <a class="ccf" href="https://chinacar.bid" target="_blank">China Car</a></div>
 <script>
 const brands=[
  {b:"#C7000B",i:"华",en:"HUAWEI",tag:"التصوير · HarmonyOS",url:"https://sldiary.com/browse.html?d=20"},
