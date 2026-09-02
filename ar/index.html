@@ -103,7 +103,9 @@ const brands=[
  {b:"#005BA8",i:"中",en:"ZTE",tag:"الشبكات · نوبيا"}
 ];
 const g=document.getElementById('g');
-g.innerHTML=brands.map(function(b){var open=b.url?'<a class="card" style="display:block;text-decoration:none;color:inherit;" href="'+b.url+'">':'<div class="card">';var close=b.url?'</a>':'</div>';return open+'<div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div>'+(b.zh?'<div class="zh">'+b.zh+'</div>':'')+'<div class="tag">'+b.tag+'</div>'+close;}).join('');
+g.innerHTML=brands.map(function(b){return '<a class="card" data-brand="'+b.en+'" href="#" style="display:block;text-decoration:none;color:inherit;">'+'<div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div>'+(b.zh?'<div class="zh">'+b.zh+'</div>':'')+'<div class="tag">'+b.tag+'</div></a>';}).join('');
+function loadLinks(){fetch('https://elrsrrvvuhfbkmxnvtod.supabase.co/rest/v1/brand_links?select=brand_key,diary_id&site=eq.chinamobile',{headers:{apikey:'sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6',Authorization:'Bearer sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6'}}).then(function(r){return r.json();}).then(function(rows){var m={};rows.forEach(function(r){m[r.brand_key]=r.diary_id;});document.querySelectorAll('a.card[data-brand]').forEach(function(a){var k=a.getAttribute('data-brand');if(m[k]){a.href='https://sldiary.com/browse.html?d='+m[k]+'&lang=en';a.style.cursor='pointer';}else{a.href='javascript:void(0)';a.style.cursor='default';}});}).catch(function(){});}
+loadLinks();
 </script>
 
 <div class="help-modal" id="helpModal">
