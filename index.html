@@ -23,6 +23,8 @@
 body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
 .hero{background:linear-gradient(135deg,#ff8a3d,#ff6a1a 55%,#e8550a);color:#fff;padding:26px 18px 22px;text-align:center;position:relative;}
 .hero .hlp{position:absolute;top:16px;right:16px;background:#fff;color:#e8531e;border:none;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;}
+.hero .ccl{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.16);color:#fff;text-decoration:none;padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:700;}
+.hero .ccl:hover{background:rgba(255,255,255,.28);}
 .hero .hlp:hover{background:#ffe9d8;}
 .footer .ccf{color:#e8550a;text-decoration:none;font-weight:700;}
 .footer .ccf:hover{text-decoration:underline;}
@@ -78,7 +80,7 @@ body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;back
 </script>
 </head>
 <body>
-<div class="hero"><button class="hlp" onclick="openHelp()">Help</button><h1>📱 Chinese Phone Brands</h1><p>Top Domestic Chinese Smartphone Brands</p></div>
+<div class="hero"><a class="ccl" href="https://chinacar.bid" target="_blank">🚗 China Car</a><button class="hlp" onclick="openHelp()">Help</button><h1>📱 Chinese Phone Brands</h1><p>Top Domestic Chinese Smartphone Brands</p></div>
 <div class="wrap"><div class="grid" id="g"></div></div>
 
   <div class="dl">
@@ -87,7 +89,7 @@ body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;back
     <a class="btn" href="https://sldiary.com/diary-v1.0.0.apk" download>📥 Android · Download App</a>
     <a class="btn secondary" href="https://sldiary.com" target="_blank">🍎 iOS · TestFlight</a>
   </div>
-    <div class="footer">China Mobile · Showcase · <a class="ccf" href="https://chinacar.bid" target="_blank">China Car</a></div>
+    <div class="footer">China Mobile · Showcase</div>
 <script>
 const brands=[
  {b:"#C7000B",i:"华",en:"HUAWEI",zh:"华为",tag:"Imaging · HarmonyOS",url:"https://sldiary.com/browse.html?d=20"},
