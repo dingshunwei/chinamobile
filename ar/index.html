@@ -88,24 +88,20 @@ body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;back
 </div>
   <div class="footer">China Mobile · معرض</div>
 <script>
-const brands=[
- {b:"#C7000B",i:"华",en:"HUAWEI",tag:"التصوير · HarmonyOS",url:"https://sldiary.com/browse.html?d=20&lang=en"},
- {b:"#FF6900",i:"米",en:"Xiaomi",tag:"القيمة · المنزل الذكي"},
- {b:"#00A870",i:"O",en:"OPPO",tag:"التصوير · الشحن السريع"},
- {b:"#415FFF",i:"V",en:"vivo",tag:"التصوير · OriginOS"},
- {b:"#007EFF",i:"荣",en:"HONOR",tag:"القابل للطي · Magic"},
- {b:"#F5010C",i:"一",en:"OnePlus",tag:"الرائد · OxygenOS"},
- {b:"#FFC915",i:"R",en:"realme",tag:"الرياضات الإلكترونية · القيمة"},
- {b:"#0084FF",i:"魅",en:"Meizu",tag:"الحرفية · Flyme"},
- {b:"#FF6700",i:"红",en:"Redmi",tag:"القيمة · المتانة"},
- {b:"#1B4FE0",i:"i",en:"iQOO",tag:"الرياضات الإلكترونية · الشحن السريع"},
- {b:"#E60012",i:"努",en:"nubia",tag:"ريد ماجيك · الرياضات الإلكترونية"},
- {b:"#005BA8",i:"中",en:"ZTE",tag:"الشبكات · نوبيا"}
-];
-const g=document.getElementById('g');
-g.innerHTML=brands.map(function(b){return '<a class="card" data-brand="'+b.en+'" href="#" style="display:block;text-decoration:none;color:inherit;">'+'<div class="badge" style="background:'+b.b+'">'+b.i+'</div><div class="en">'+b.en+'</div>'+(b.zh?'<div class="zh">'+b.zh+'</div>':'')+'<div class="tag">'+b.tag+'</div></a>';}).join('');
-function loadLinks(){fetch('https://elrsrrvvuhfbkmxnvtod.supabase.co/rest/v1/brand_links?select=brand_key,diary_id&site=eq.chinamobile',{headers:{apikey:'sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6',Authorization:'Bearer sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6'}}).then(function(r){return r.json();}).then(function(rows){var m={};rows.forEach(function(r){m[r.brand_key]=r.diary_id;});document.querySelectorAll('a.card[data-brand]').forEach(function(a){var k=a.getAttribute('data-brand');if(m[k]){a.href='https://sldiary.com/browse.html?d='+m[k]+'&lang=en';a.style.cursor='pointer';}else{a.href='javascript:void(0)';a.style.cursor='default';}});}).catch(function(){});}
-loadLinks();
+const SB='https://elrsrrvvuhfbkmxnvtod.supabase.co/rest/v1',KEY='sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
+fetch(SB+'/brands?select=name,zh,tag,color,icon&site=eq.chinamobile&order=ord.asc',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}})
+.then(function(r){return r.json();}).then(function(brands){
+var g=document.getElementById('g');
+g.innerHTML=brands.map(function(b){return '<a class="card" data-brand="'+b.name+'" href="#" style="display:block;text-decoration:none;color:inherit;">'
++'<div class="badge" style="background:'+b.color+'">'+b.icon+'</div><div class="en">'+b.name+'</div>'
++(b.zh?'<div class="zh">'+b.zh+'</div>':'')+(b.tag?'<div class="tag">'+b.tag+'</div>':'')+'</a>';}).join('');
+fetch(SB+'/brand_links?select=brand_key,diary_id&site=eq.chinamobile',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}})
+.then(function(r){return r.json();}).then(function(rows){var m={};rows.forEach(function(r){m[r.brand_key]=r.diary_id;});
+document.querySelectorAll('a.card[data-brand]').forEach(function(a){var k=a.getAttribute('data-brand');
+if(m[k]){a.href='https://sldiary.com/browse.html?d='+m[k]+'&lang=en';a.style.cursor='pointer';}
+else{a.href='javascript:void(0)';a.style.cursor='default';}});}).catch(function(){});
+}).catch(function(){});
+
 </script>
 
 <div class="help-modal" id="helpModal">
