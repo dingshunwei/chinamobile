@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://chinamobile.uk/sitemap.xml
+Sitemap: https://www.chinamobile.uk/sitemap.xml
