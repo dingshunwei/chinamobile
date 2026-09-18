@@ -151,6 +151,7 @@ const SB='https://elrsrrvvuhfbkmxnvtod.supabase.co/rest/v1',KEY='sb_publishable_
 var H={}; H['api'+'key']=KEY; H['Author'+'ization']='Bearer '+KEY;
 function slug(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function lang(){return (document.documentElement.getAttribute('lang')||'en').slice(0,2);}
+function pre(){var l=lang();return l==='en'?'':l+'/';}
 var COPY={};
 fetch(SB+'/trade_settings?select=value&' + 'key=' + 'eq.brand_copy',{headers:H})
 .then(function(r){return r.json();}).then(function(rows){try{COPY=JSON.parse((rows[0]||{}).value||'{}');}catch(e){COPY={};}})
@@ -162,7 +163,7 @@ var g=document.getElementById('g'), L=lang();
 function desc(b){var c=COPY[b.name]||{};return (L==='zh'?(c.zh||c.en):(c.en||c.zh))||'';}
 fetch(SB+'/brand_links?select=brand_key,diary_id&site=eq.chinamobile',{headers:H})
 .then(function(r){return r.json();}).then(function(rows){var dm={};rows.forEach(function(r){dm[r.brand_key]=r.diary_id;});
-g.innerHTML=brands.map(function(b){var href='/'+(L==='zh'?'zh/':'')+'brand/'+slug(b.name)+'.html';var d=dm[b.name];
+g.innerHTML=brands.map(function(b){var href='/'+pre()+'brand/'+slug(b.name)+'.html';var d=dm[b.name];
 var v=d?('https://sldiary.com/browse.html?d='+d+'&lang='+L):'';
 return '<div class="card">'
 +'<a href="'+href+'" style="display:block;text-decoration:none;color:inherit;">'
