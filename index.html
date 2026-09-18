@@ -160,7 +160,7 @@ fetch(SB+'/trade_settings?select=value&' + 'key=' + 'eq.brand_copy',{headers:H})
 fetch(SB+'/brands?select=name,zh,tag,color,icon&site=eq.chinamobile&order=ord.asc',{headers:H})
 .then(function(r){return r.json();}).then(function(brands){
 var g=document.getElementById('g'), L=lang();
-function desc(b){var c=COPY[b.name]||{};return (L==='zh'?(c.zh||c.en):(c.en||c.zh))||'';}
+function desc(b){var c=COPY[b.name]||{};return c[L]||c.en||c.zh||'';}
 fetch(SB+'/brand_links?select=brand_key,diary_id&site=eq.chinamobile',{headers:H})
 .then(function(r){return r.json();}).then(function(rows){var dm={};rows.forEach(function(r){dm[r.brand_key]=r.diary_id;});
 g.innerHTML=brands.map(function(b){var href='/'+pre()+'brand/'+slug(b.name)+'.html';var d=dm[b.name];
