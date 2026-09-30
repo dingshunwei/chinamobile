@@ -198,16 +198,16 @@ footer a:hover{color:var(--accent)}
   <div class="wrap">
     <div>
       <span data-k="hero_kicker" class="kicker">New Brand · Since 2026</span>
-      <h1 class="reveal">把每一件产品<br>做到<em>最好</em></h1>
+      <h1 class="reveal" data-k="hero_h1">把每一件产品<br>做到<em>最好</em></h1>
       <p data-k="hero_lead" class="lead reveal">丁创世，一个刚刚起步的新锐品牌。我们不急着做大，只想着把产品本身做到位 —— 从选材、设计到出品，每一步都认真对待。</p>
       <div class="cta reveal">
-        <a class="btn pri" href="#apps">看看我们的 App →</a>
-        <a class="btn gho" href="#contact">聊聊合作</a>
+        <a class="btn pri" href="#apps" data-k="hero_cta1">看看我们的 App →</a>
+        <a class="btn gho" href="#contact" data-k="hero_cta2">聊聊合作</a>
       </div>
       <div class="trust reveal">
-        <span>✦ <b>源头直供</b></span>
-        <span>✦ <b>用心选品</b></span>
-        <span>✦ <b>一对一服务</b></span>
+        <span data-k="hero_trust1">✦ <b>源头直供</b></span>
+        <span data-k="hero_trust2">✦ <b>用心选品</b></span>
+        <span data-k="hero_trust3">✦ <b>一对一服务</b></span>
       </div>
     </div>
     <div class="stage reveal">
@@ -219,9 +219,9 @@ footer a:hover{color:var(--accent)}
 </section>
 
 <div class="marq"><div>
-  <span>好产品，值得被看见</span><i>✦</i>
-  <span>源头工厂 · 品质直供</span><i>✦</i>
-  <span>用心选品 · 认真出品</span><i>✦</i>
+  <span data-k="mq1">好产品，值得被看见</span><i>✦</i>
+  <span data-k="mq2">源头工厂 · 品质直供</span><i>✦</i>
+  <span data-k="mq3">用心选品 · 认真出品</span><i>✦</i>
   <span>好产品，值得被看见</span><i>✦</i>
   <span>源头工厂 · 品质直供</span><i>✦</i>
   <span>用心选品 · 认真出品</span><i>✦</i>
@@ -351,10 +351,10 @@ footer a:hover{color:var(--accent)}
         <span data-k="tag_contact" class="tag">Contact</span>
         <h2 data-k="c_title" class="h2">聊聊你的需求</h2>
         <div class="c-info">
-          <p><b>邮箱</b>zhansuit@qq.com</p>
-          <p><b>微信</b>dingnew（待填）</p>
-          <p><b>电话</b>+86 ——（待填）</p>
-          <p><b>地址</b>——（待填）</p>
+          <p data-k="c_email"><b>邮箱</b>zhansuit@qq.com</p>
+          <p data-k="c_wechat"><b>微信</b>dingnew（待填）</p>
+          <p data-k="c_phone"><b>电话</b>+86 ——（待填）</p>
+          <p data-k="c_address"><b>地址</b>——（待填）</p>
         </div>
         <div class="c-info" style="margin-top:22px">
           <p><b>我们的 App</b></p>
@@ -363,9 +363,9 @@ footer a:hover{color:var(--accent)}
         </div>
       </div>
       <form class="reveal" onsubmit="event.preventDefault();this.querySelector('button').textContent='已收到 ✓（演示）'">
-        <div class="f2"><input placeholder="您的称呼" required><input placeholder="联系方式（微信/电话）"></div>
-        <input type="email" placeholder="邮箱（选填）">
-        <textarea placeholder="想了解什么产品？或说说你的需求…"></textarea>
+        <div class="f2"><input data-k-ph="f_name_ph" placeholder="您的称呼" required><input data-k-ph="f_contact_ph" placeholder="联系方式（微信/电话）"></div>
+        <input type="email" data-k-ph="f_email_ph" placeholder="邮箱（选填）">
+        <textarea data-k-ph="f_msg_ph" placeholder="想了解什么产品？或说说你的需求…"></textarea>
         <button data-k="f_send" class="btn pri" type="submit">发送 →</button>
       </form>
     </div>
@@ -373,7 +373,7 @@ footer a:hover{color:var(--accent)}
 </section>
 
 <footer><div class="wrap row">
-  <span>© 2026 丁创世 DingCreate · 保留所有权利</span>
+  <span data-k="footer_copy">© 2026 丁创世 DingCreate · 保留所有权利</span>
   <span class="links"><a href="#web">Web</a><a href="#apps">App</a><a href="#why">为什么</a><a href="#story">品牌</a><a href="#contact">联系</a></span>
   <span class="links" style="margin-top:6px">
     <a href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk">Mobile China 下载</a>
@@ -471,6 +471,10 @@ function sbRender(){
   });
   const navBySlug = {};
   (d.nav || []).forEach(function(n){ navBySlug[n.slug] = n; });
+  document.querySelectorAll('[data-k-ph]').forEach(function(el){
+    const v = map[el.getAttribute('data-k-ph')];
+    if (v !== undefined && v !== null && v !== '') el.setAttribute('placeholder', v);
+  });
   document.querySelectorAll('[data-nav]').forEach(function(el){
     const n = navBySlug[el.getAttribute('data-nav')];
     if (n) { const v = sbPick(n,'title'); if (v) el.innerHTML = v; }
