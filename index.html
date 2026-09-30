@@ -439,6 +439,7 @@ const SB_KEY = 'sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
 const SB_HDR = { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY };
 window.__SB = null;
 var SB_DOC = null;
+var SB_DOC2 = null;
 
 function sbLang(){
   const l = document.documentElement.lang || 'en';
@@ -464,7 +465,7 @@ function sbRender(){
   const map = {};
   (d.set || []).forEach(function(r){ map[r.key] = sbPick(r,'value'); });
   SB_SET.btn_visit = map['btn_visit'] || ''; SB_SET.btn_dl = map['btn_dl'] || '';
-  try { SB_DOC = map['page_home'] ? JSON.parse(map['page_home']) : null; } catch(e) { SB_DOC = null; }
+  try { SB_DOC2 = map['doc_v2'] ? JSON.parse(map['doc_v2']) : (map['page_home'] ? JSON.parse(map['page_home']) : null); } catch(e) { SB_DOC2 = null; }
   document.querySelectorAll('[data-k]').forEach(function(el){
     const v = map[el.getAttribute('data-k')];
     if (v !== undefined && v !== null && v !== '') el.innerHTML = v;
@@ -496,7 +497,7 @@ function sbRender(){
   });
   try { renderDoc(); } catch(e) { console.warn('文档渲染失败', e); }
   try {
-    const cDoc = (window.SB_DOC && window.SB_DOC.sections || []).filter(function(s){ return s && s.kind === 'contact'; })[0];
+    const cDoc = null;
     const cEl = document.getElementById('contact');
     if (cEl) {
       if (!cDoc || cDoc.visible === false) { cEl.style.display = 'none'; }
@@ -532,46 +533,83 @@ function sbRender(){
 })();
 
 
-/* ===== 按「页面文档」渲染版块（作者 App 那种：结构存 JSON，随便加删排）===== */
+/* ===== 按「页面文档 v2」渲染（一个导航项 = 一篇内容，里面是内容块）===== */
 function _tri(o){ if(!o) return ''; const l=sbLang(); return o[l] || o.en || o.zh || ''; }
-function _visitLabel(link){ return /\.(apk|ipa)(\?|$)/i.test(link||'') ? (SB_SET.btn_dl||'Android 下载 ↓') : (SB_SET.btn_visit||'访问 →'); }
-var SB_SET = {};
-function _cardHtml(c){
-  const t=_tri(c.title), b=_tri(c.body), link=c.link||'', img=c.image||'', vid=c.video||'';
-  const btn = link ? ('<p style="margin-top:12px"><a href="'+link+'" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">'+_visitLabel(link)+'</a></p>') : '';
-  const media = img ? ('<img src="'+img+'" loading="lazy" style="width:100%;border-radius:12px;margin-top:10px">') : '';
-  const video = vid ? ('<video src="'+vid+'" controls style="width:100%;border-radius:12px;margin-top:10px"></video>') : '';
-  return '<div class="why reveal in"><h3>'+t+'</h3><p>'+b+'</p>'+media+video+btn+'</div>';
+function _btnLabel(link, dl){ return /\\.(apk|ipa)(\\?|$)/i.test(link||'') ? (dl[0]||'Android 下载 ↓') : (dl[1]||'访问 →'); }
+function _dl(){ return (SB_DOC2 && SB_DOC2.footer && SB_DOC2.footer.dl) || ['', '']; }
+function _blk(b){
+  const t=''+b.type;
+  if(t==='text') return '<div class="wrap"><div class="story reveal in" style="max-width:820px"><p>'+_tri(b.text)+'</p></div></div>';
+  if(t==='image') return b.image ? '<div class="wrap"><img src="'+b.image+'" loading="lazy" style="width:100%;border-radius:14px"><p style="text-align:center;color:#6b6862;font-size:13px;margin-top:8px">'+_tri(b.text)+'</p></div>' : '';
+  if(t==='video') return b.video ? '<div class="wrap"><video src="'+b.video+'" controls style="width:100%;border-radius:14px"></video><p style="text-align:center;color:#6b6862;font-size:13px;margin-top:8px">'+_tri(b.text)+'</p></div>' : '';
+  if(t==='link'){
+    const link=b.link||'';
+    return '<div class="wrap"><div class="why reveal in" style="max-width:820px"><h3>'+_tri(b.text)+'</h3><p>'+_tri(b.body)+'</p>'
+      + (b.image?'<img src="'+b.image+'" loading="lazy" style="width:100%;border-radius:12px;margin-top:10px">':'')
+      + (link?'<p style="margin-top:12px"><a href="'+link+'" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">'+_btnLabel(link,_dl())+'</a></p>':'')
+      + '</div></div>';
+  }
+  if(t==='cards'){
+    const cs=(b.cards||[]);
+    return '<div class="wrap"><div class="why-grid">'+cs.map(function(c){
+      const link=c.link||'', img=c.image||'', vid=c.video||'';
+      return '<div class="why reveal in"><h3>'+_tri(c.title)+'</h3><p>'+_tri(c.body)+'</p>'
+        + (img?'<img src="'+img+'" loading="lazy" style="width:100%;border-radius:12px;margin-top:10px">':'')
+        + (vid?'<video src="'+vid+'" controls style="width:100%;border-radius:12px;margin-top:10px"></video>':'')
+        + (link?'<p style="margin-top:12px"><a href="'+link+'" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">'+_btnLabel(link,_dl())+'</a></p>':'')
+        + '</div>';
+    }).join('')+'</div></div>';
+  }
+  return '';
 }
-function _headHtml(s){
-  const tag=_tri(s.tag), title=_tri(s.title), sub=_tri(s.sub);
-  return '<div class="wrap"><div class="sec-top reveal in"><div>'
-       + (tag ? '<span class="tag">'+tag+'</span>' : '')
-       + '<h2 class="h2">'+title+'</h2>'
-       + (sub ? '<p class="sub">'+sub+'</p>' : '')
-       + '</div></div></div>';
+function _item(it){
+  const tag=_tri(it.tag), title=_tri(it.title), sub=_tri(it.sub);
+  const body=(it.blocks||[]).filter(function(b){ return b && (b.type!=='cards' || (b.cards||[]).length); }).map(_blk).join('');
+  if(!body) return '';
+  return '<section id="'+it.key+'"><div class="wrap"><div class="sec-top reveal in"><div>'
+       + (tag?'<span class="tag">'+tag+'</span>':'') + '<h2 class="h2">'+title+'</h2>'
+       + (sub?'<p class="sub">'+sub+'</p>':'') + '</div></div></div>' + body + '</section>';
 }
-function _secHtml(s){
-  const kind = s.kind || 'cards';
-  if (kind === 'contact') return '';                      // 联系区由【文案】维护
-  const cards = (s.cards || []).filter(function(c){ return c; });
-  const inner = (kind === 'story')
-    ? ('<div class="wrap"><div class="story-grid"><div class="storycard reveal in"><b>'
-        + (cards[0] ? _tri(cards[0].title) : '') + '</b></div><div class="story reveal in">'
-        + (cards[0] ? '<p>'+_tri(cards[0].body)+'</p>' : '') + '</div></div></div>')
-    : ('<div class="wrap"><div class="why-grid">' + cards.map(_cardHtml).join('') + '</div></div>');
-  return '<section id="'+s.key+'">' + _headHtml(s) + inner + '</section>';
-}
+function _setText(sel, v){ const el=document.querySelector(sel); if(el && v!==undefined && v!==null) el.innerHTML=v; }
 function renderDoc(){
-  const raw = SB_DOC; if (!raw) return;
-  const box = document.getElementById('sections'); if (!box) return;
-  const secs = (raw.sections || []).filter(function(s){
-    return s && s.visible !== false && ((s.cards || []).length > 0);
-  });
-  if (!secs.length) { box.innerHTML = ''; return; }
-  box.innerHTML = secs.map(_secHtml).join('');
+  const d=SB_DOC2; if(!d) return;
+  // 首屏
+  const h=d.hero||{};
+  _setText('.kicker', _tri(h.kicker)); _setText('.hero h1', _tri(h.title)); _setText('.lead', _tri(h.lead));
+  const cta=document.querySelectorAll('.cta a'); if(cta.length>1){ cta[0].innerHTML=_tri(h.cta1); cta[1].innerHTML=_tri(h.cta2); }
+  const tr=document.querySelectorAll('.trust span'); (h.trust||[]).forEach(function(t,i){ if(tr[i]) tr[i].innerHTML=_tri(t); });
+  _setText('.badge.a', _tri(h.badgeA)); _setText('.badge.b', _tri(h.badgeB));
+  const ph=document.querySelector('.ph span'); if(ph) ph.innerHTML=_tri(h.ph);
+  const mq=document.querySelectorAll('.marq span'); const ms=h.marquee||[];
+  if(mq.length) for(let i=0;i<mq.length;i++){ const v=_tri(ms[i%3]); if(v) mq[i].innerHTML=v; }
+  // 版块
+  const box=document.getElementById('sections');
+  if(box){ const secs=(d.items||[]).filter(function(it){ return it && it.visible!==false && it.kind!=='contact'; });
+    box.innerHTML=secs.map(_item).join(''); }
+  // 联系区（表单写死，这里只换标签/标题/副标题/四行联系方式）
+  const cIt=(d.items||[]).filter(function(it){ return it && it.kind==='contact'; })[0];
+  const cEl=document.getElementById('contact');
+  if(cEl){
+    if(!cIt || cIt.visible===false){ cEl.style.display='none'; }
+    else{
+      cEl.style.display='';
+      _setText('#contact .tag', _tri(cIt.tag)); _setText('#contact .h2', _tri(cIt.title));
+      const info=cEl.querySelector('.c-info');
+      const fb=(cIt.blocks||[]).filter(function(b){ return b && b.type==='fields'; })[0];
+      if(info && fb){ info.innerHTML=(fb.fields||[]).map(function(f){
+        return '<p><b>'+_tri(f.label)+'</b>'+_tri(f.value)+'</p>'; }).join(''); }
+    }
+  }
+  // 品牌 / 页脚
+  const br=d.brand||{};
+  _setText('.logo b', _tri(br.zh)); _setText('.logo i', _tri(br.en));
+  const f=d.footer||{}; const fs=document.querySelector('footer .wrap > span'); if(fs) fs.innerHTML=_tri(f.copy);
+  // 菜单（顶栏 + 页脚），从 inMenu 的导航项生成
+  const menu=(d.items||[]).filter(function(it){ return it && it.visible!==false && it.inMenu!==false && it.kind!=='hero' && it.kind!=='footer'; });
+  const html=menu.map(function(it){ return '<a href="#'+it.key+'">'+_tri(it.title)+'</a>'; }).join('');
+  const ul=document.querySelector('.nav ul'); if(ul) ul.innerHTML=html;
+  const fls=document.querySelectorAll('footer .links'); if(fls.length) fls[0].innerHTML=html;
 }
-
 /* --- 手机端汉堡菜单：打开时从桌面导航克隆（跟着当前语言）--- */
 (function(){
   const b=document.getElementById('burger'), m=document.getElementById('mnav'), box=document.getElementById('mnavIn');
