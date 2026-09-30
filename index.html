@@ -464,7 +464,6 @@ function sbRender(){
   const d = window.__SB; if (!d) return;
   const map = {};
   (d.set || []).forEach(function(r){ map[r.key] = sbPick(r,'value'); });
-  SB_SET.btn_visit = map['btn_visit'] || ''; SB_SET.btn_dl = map['btn_dl'] || '';
   try { SB_DOC2 = map['doc_v2'] ? JSON.parse(map['doc_v2']) : (map['page_home'] ? JSON.parse(map['page_home']) : null); } catch(e) { SB_DOC2 = null; }
   document.querySelectorAll('[data-k]').forEach(function(el){
     const v = map[el.getAttribute('data-k')];
