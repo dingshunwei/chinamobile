@@ -426,8 +426,83 @@ function setLang(l){
   const _sel = document.getElementById('langSel');
   if(_sel) _sel.value = l;
   try{ localStorage.setItem('dn_lang', l); }catch(e){}
+  try{ if(window.__SB) sbRender(); }catch(e){}
 }
 (function(){ const s=document.getElementById('langSel'); if(s) s.onchange=()=>setLang(s.value); })();
+
+/* ===== 动态内容：从 Supabase 读（后台 App 改完 → 刷新即变）===== */
+const SB_URL = 'https://elrsrrvvuhfbkmxnvtod.supabase.co';
+const SB_KEY = 'sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
+const SB_HDR = { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY };
+window.__SB = null;
+
+function sbLang(){
+  const l = document.documentElement.lang || 'en';
+  return l.indexOf('zh') === 0 ? 'zh' : (l === 'ar' ? 'ar' : 'en');
+}
+function sbPick(o, field){
+  const l = sbLang();
+  let v = o[field + '_' + l];
+  if (v === undefined || v === null || v === '') v = o[field + '_en'];
+  if (v === undefined || v === null || v === '') v = o[field + '_zh'];
+  return (v === undefined || v === null) ? '' : v;
+}
+function sbCard(it){
+  const t = sbPick(it,'title'), bd = sbPick(it,'body');
+  const link = it.link_url || '', img = it.image_url || '', vid = it.video_url || '';
+  const btn = link ? ('<p style="margin-top:12px"><a href="' + link + '" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600" data-k="btn_visit">访问 →</a></p>') : '';
+  const media = img ? ('<img src="' + img + '" loading="lazy" style="width:100%;border-radius:12px;margin-top:10px">') : '';
+  const video = vid ? ('<video src="' + vid + '" controls style="width:100%;border-radius:12px;margin-top:10px"></video>') : '';
+  return '<div class="why reveal in"><h3>' + t + '</h3><p>' + bd + '</p>' + media + video + btn + '</div>';
+}
+function sbRender(){
+  const d = window.__SB; if (!d) return;
+  const map = {};
+  (d.set || []).forEach(function(r){ map[r.key] = sbPick(r,'value'); });
+  document.querySelectorAll('[data-k]').forEach(function(el){
+    const v = map[el.getAttribute('data-k')];
+    if (v !== undefined && v !== null && v !== '') el.innerHTML = v;
+  });
+  const navBySlug = {};
+  (d.nav || []).forEach(function(n){ navBySlug[n.slug] = n; });
+  document.querySelectorAll('[data-nav]').forEach(function(el){
+    const n = navBySlug[el.getAttribute('data-nav')];
+    if (n) { const v = sbPick(n,'title'); if (v) el.innerHTML = v; }
+  });
+  document.querySelectorAll('[data-navsub]').forEach(function(el){
+    const n = navBySlug[el.getAttribute('data-navsub')];
+    if (n) { const v = sbPick(n,'subtitle'); if (v) el.innerHTML = v; }
+  });
+  const groups = {};
+  (d.items || []).forEach(function(it){
+    if (it.visible === false) return;
+    (groups[it.nav_slug] = groups[it.nav_slug] || []).push(it);
+  });
+  [['web','#web .why-grid'],['apps','#apps .why-grid']].forEach(function(pair){
+    const box = document.querySelector(pair[1]); if (!box) return;
+    const list = groups[pair[0]] || [];
+    if (!list.length) return;
+    box.innerHTML = list.map(sbCard).join('');
+  });
+  document.querySelectorAll('.nav ul a, .links a').forEach(function(a){
+    const href = (a.getAttribute('href') || '');
+    if (href.indexOf('#') !== 0) return;
+    const n = navBySlug[href.slice(1)];
+    if (n) { const v = sbPick(n,'title'); if (v) a.innerHTML = v; }
+  });
+}
+(function sbLoad(){
+  Promise.all([
+    fetch(SB_URL + '/rest/v1/dingcreate_nav?select=*&order=sort', {headers: SB_HDR}).then(function(r){return r.json();}),
+    fetch(SB_URL + '/rest/v1/dingcreate_items?select=*&order=sort', {headers: SB_HDR}).then(function(r){return r.json();}),
+    fetch(SB_URL + '/rest/v1/dingcreate_settings?select=*', {headers: SB_HDR}).then(function(r){return r.json();})
+  ]).then(function(res){
+    if (!Array.isArray(res[0])) throw new Error('bad response');
+    window.__SB = { nav: res[0], items: res[1], set: res[2] };
+    sbRender();
+  }).catch(function(e){ console.warn('动态内容读取失败，保留静态内容', e); });
+})();
+
 /* --- 手机端汉堡菜单：打开时从桌面导航克隆（跟着当前语言）--- */
 (function(){
   const b=document.getElementById('burger'), m=document.getElementById('mnav'), box=document.getElementById('mnavIn');
