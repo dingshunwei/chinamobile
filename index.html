@@ -559,18 +559,27 @@ function _item(it){
 function _setText(sel, v){ const el=document.querySelector(sel); if(el && v!==undefined && v!==null) el.innerHTML=v; }
 function renderDoc(){
   const d=SB_DOC2; if(!d) return;
-  // 首屏
-  const h=d.hero||{};
-  _setText('.kicker', _tri(h.kicker)); _setText('.hero h1', _tri(h.title)); _setText('.lead', _tri(h.lead));
-  const cta=document.querySelectorAll('.cta a'); if(cta.length>1){ cta[0].innerHTML=_tri(h.cta1); cta[1].innerHTML=_tri(h.cta2); }
-  const tr=document.querySelectorAll('.trust span'); (h.trust||[]).forEach(function(t,i){ if(tr[i]) tr[i].innerHTML=_tri(t); });
-  _setText('.badge.a', _tri(h.badgeA)); _setText('.badge.b', _tri(h.badgeB));
-  const ph=document.querySelector('.ph span'); if(ph) ph.innerHTML=_tri(h.ph);
-  const mq=document.querySelectorAll('.marq span'); const ms=h.marquee||[];
-  if(mq.length) for(let i=0;i<mq.length;i++){ const v=_tri(ms[i%3]); if(v) mq[i].innerHTML=v; }
+  // 首屏（现在它也是一个导航项 kind='hero'）
+  const hIt=(d.items||[]).filter(function(it){ return it && it.kind==='hero'; })[0];
+  const hb=(hIt && hIt.blocks) || [];
+  function _hb(t){ return hb.filter(function(b){ return b && b.type===t; })[0] || null; }
+  _setText('.kicker', _tri(hIt && hIt.tag));
+  _setText('.hero h1', _tri(hIt && hIt.title));
+  _setText('.lead', _tri(hIt && hIt.sub));
+  const bts=_hb('buttons'); const cta=document.querySelectorAll('.cta a');
+  if (bts && cta.length) { const bs=bts.buttons||[];
+    if (cta[0]) cta[0].innerHTML=_tri(bs[0] && bs[0].text);
+    if (cta[1]) cta[1].innerHTML=_tri(bs[1] && bs[1].text); }
+  const trB=_hb('trust'); const trs=document.querySelectorAll('.trust span');
+  if (trB) (trB.trust||[]).forEach(function(t,i){ if (trs[i]) trs[i].innerHTML=_tri(t); });
+  const imB=_hb('image'); const phEl=document.querySelector('.ph span'); if (phEl && imB) phEl.innerHTML=_tri(imB.text);
+  const bgB=_hb('badges');
+  if (bgB) { _setText('.badge.a', _tri((bgB.badges||[])[0])); _setText('.badge.b', _tri((bgB.badges||[])[1])); }
+  const mqB=_hb('marquee'); const mqs=document.querySelectorAll('.marq span');
+  if (mqB && mqs.length) { const ms=mqB.marquee||[]; for (let i=0;i<mqs.length;i++){ const v=_tri(ms[i%3]); if(v) mqs[i].innerHTML=v; } }
   // 版块
   const box=document.getElementById('sections');
-  if(box){ const secs=(d.items||[]).filter(function(it){ return it && it.visible!==false && it.kind!=='contact'; });
+  if(box){ const secs=(d.items||[]).filter(function(it){ return it && it.visible!==false && it.kind==='section'; });
     box.innerHTML=secs.map(_item).join(''); }
   // 联系区（表单写死，这里只换标签/标题/副标题/四行联系方式）
   const cIt=(d.items||[]).filter(function(it){ return it && it.kind==='contact'; })[0];
