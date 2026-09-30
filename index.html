@@ -500,9 +500,9 @@ function sbRender(){
 }
 (function sbLoad(){
   Promise.all([
-    fetch(SB_URL + '/rest/v1/dingcreate_nav?select=*&order=sort', {headers: SB_HDR}).then(function(r){return r.json();}),
-    fetch(SB_URL + '/rest/v1/dingcreate_items?select=*&order=sort', {headers: SB_HDR}).then(function(r){return r.json();}),
-    fetch(SB_URL + '/rest/v1/dingcreate_settings?select=*', {headers: SB_HDR}).then(function(r){return r.json();})
+    fetch(SB_URL + '/rest/v1/dingcreate_nav?select=*&order=sort&_=' + Date.now(), {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();}),
+    fetch(SB_URL + '/rest/v1/dingcreate_items?select=*&order=sort&_=' + Date.now(), {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();}),
+    fetch(SB_URL + '/rest/v1/dingcreate_settings?select=*&_=' + Date.now(), {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();})
   ]).then(function(res){
     if (!Array.isArray(res[0])) throw new Error('bad response');
     window.__SB = { nav: res[0], items: res[1], set: res[2] };
@@ -544,8 +544,10 @@ function _secHtml(s){
 function renderDoc(){
   const raw = SB_DOC; if (!raw) return;
   const box = document.getElementById('sections'); if (!box) return;
-  const secs = (raw.sections || []).filter(function(s){ return s && s.visible !== false; });
-  if (!secs.length) return;
+  const secs = (raw.sections || []).filter(function(s){
+    return s && s.visible !== false && ((s.cards || []).length > 0);
+  });
+  if (!secs.length) { box.innerHTML = ''; return; }
   box.innerHTML = secs.map(_secHtml).join('');
 }
 
