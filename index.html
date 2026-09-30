@@ -34,6 +34,14 @@ header.solid{background:rgba(247,244,238,.88);backdrop-filter:blur(16px);border-
 .nav ul a:hover{color:var(--ink)}.nav ul a:hover::after{width:100%}
 .lang{font-size:12.5px;font-weight:600;color:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:5px 13px;cursor:pointer;transition:.3s}
 .lang:hover{background:var(--accent);color:#fff}
+/* --- 手机端导航（汉堡）--- */
+.burger{display:none;background:none;border:0;font-size:22px;line-height:1;cursor:pointer;color:var(--ink);padding:2px 6px}
+.mnav{display:none;background:#fff;border-bottom:1px solid rgba(0,0,0,.08);box-shadow:0 12px 24px rgba(0,0,0,.06)}
+.mnav.open{display:block}
+.mnav a{display:block;padding:13px 22px;font-size:15px;color:var(--ink);border-top:1px solid rgba(0,0,0,.05)}
+.mnav a:active{background:rgba(228,120,59,.10)}
+@media(max-width:980px){.burger{display:block}}
+
 .lang{padding:0;position:relative}
 .lang select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:inherit;
   font:inherit;font-weight:600;cursor:pointer;padding:5px 26px 5px 13px;outline:none}
@@ -158,7 +166,7 @@ footer a:hover{color:var(--accent)}
 .js .reveal.in{opacity:1;transform:none}
 
 @media(max-width:980px){
-  .nav ul,.lang,.buy{display:none}
+  .nav ul,.buy{display:none}
   .hero .wrap,.story-grid,.c-grid{grid-template-columns:1fr;gap:44px}
   .grid{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr 1fr}
@@ -181,8 +189,10 @@ footer a:hover{color:var(--accent)}
     </ul>
     <div class="lang" id="langSw"><select id="langSel" aria-label="Language"><option value="en">English</option><option value="zh">中文</option><option value="ar">العربية</option></select></div>
     <a class="buy" href="#contact">立即咨询</a>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
   </div>
 </header>
+<nav class="mnav" id="mnav"><div id="mnavIn"></div></nav>
 
 <section class="hero">
   <div class="wrap">
@@ -418,6 +428,22 @@ function setLang(l){
   try{ localStorage.setItem('dn_lang', l); }catch(e){}
 }
 (function(){ const s=document.getElementById('langSel'); if(s) s.onchange=()=>setLang(s.value); })();
+/* --- 手机端汉堡菜单：打开时从桌面导航克隆（跟着当前语言）--- */
+(function(){
+  const b=document.getElementById('burger'), m=document.getElementById('mnav'), box=document.getElementById('mnavIn');
+  if(!b||!m||!box) return;
+  b.onclick=function(){
+    if(!m.classList.contains('open')){
+      box.innerHTML=[].map.call(document.querySelectorAll('.nav ul a'), function(a){
+        return '<a href="'+a.getAttribute('href')+'">'+a.innerHTML+'</a>';
+      }).join('');
+      box.querySelectorAll('a').forEach(function(a){
+        a.onclick=function(){ m.classList.remove('open'); };
+      });
+    }
+    m.classList.toggle('open');
+  };
+})();
 setLang((function(){
   try{
     const u=new URLSearchParams(location.search).get('lang');
