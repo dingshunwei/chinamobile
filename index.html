@@ -502,9 +502,8 @@ function sbRender(){
     }).join('');
   }
   const ul = document.querySelector('.nav ul'); if (ul) ul.innerHTML = buildLinks();
-  document.querySelectorAll('footer .links, .links').forEach(function(el){
-    if (el.closest('footer')) el.innerHTML = buildLinks();
-  });
+  const fl = document.querySelectorAll('footer .links');
+  if (fl.length) fl[0].innerHTML = buildLinks();     // 只改第一个（第二个是下载链接）
 }
 (function sbLoad(){
   Promise.all([
