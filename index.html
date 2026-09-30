@@ -495,11 +495,15 @@ function sbRender(){
     box.innerHTML = list.map(sbCard).join('');
   });
   try { renderDoc(); } catch(e) { console.warn('文档渲染失败', e); }
-  document.querySelectorAll('.nav ul a, .links a').forEach(function(a){
-    const href = (a.getAttribute('href') || '');
-    if (href.indexOf('#') !== 0) return;
-    const n = navBySlug[href.slice(1)];
-    if (n) { const v = sbPick(n,'title'); if (v) a.innerHTML = v; }
+  const navOrder = (d.nav || []).filter(function(n){ return n.visible !== false; });
+  function buildLinks(){
+    return navOrder.map(function(n){
+      return '<a href="#'+n.slug+'">'+sbPick(n,'title')+'</a>';
+    }).join('');
+  }
+  const ul = document.querySelector('.nav ul'); if (ul) ul.innerHTML = buildLinks();
+  document.querySelectorAll('footer .links, .links').forEach(function(el){
+    if (el.closest('footer')) el.innerHTML = buildLinks();
   });
 }
 (function sbLoad(){
