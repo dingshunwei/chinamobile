@@ -500,9 +500,9 @@ function sbRender(){
 }
 (function sbLoad(){
   Promise.all([
-    fetch(SB_URL + '/rest/v1/dingcreate_nav?select=*&order=sort, {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();}),
-    fetch(SB_URL + '/rest/v1/dingcreate_items?select=*&order=sort, {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();}),
-    fetch(SB_URL + '/rest/v1/dingcreate_settings?select=*, {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();})
+    fetch(SB_URL + '/rest/v1/dingcreate_nav?select=*&order=sort', {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();}),
+    fetch(SB_URL + '/rest/v1/dingcreate_items?select=*&order=sort', {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();}),
+    fetch(SB_URL + '/rest/v1/dingcreate_settings?select=*', {headers: SB_HDR, cache: 'no-store'}).then(function(r){return r.json();})
   ]).then(function(res){
     if (!Array.isArray(res[0])) throw new Error('bad response');
     window.__SB = { nav: res[0], items: res[1], set: res[2] };
