@@ -504,8 +504,8 @@ function sbRender(){
         cEl.style.display = '';
         const tg = _tri(cDoc.tag), tt = _tri(cDoc.title), sb = _tri(cDoc.sub);
         const tgEl = cEl.querySelector('.tag'), h2El = cEl.querySelector('.h2');
-        if (tgEl && tg) tgEl.innerHTML = tg;
-        if (h2El && tt) h2El.innerHTML = tt;
+        if (tgEl) tgEl.innerHTML = tg;        // 清空也照做
+        if (h2El) h2El.innerHTML = tt;
       }
     }
   } catch(e) { console.warn('联系区处理失败', e); }
