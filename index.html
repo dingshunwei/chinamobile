@@ -228,6 +228,7 @@ footer a:hover{color:var(--accent)}
 </div></div>
 
 
+<div id="sections">
 <section id="web">
   <div class="wrap">
     <div class="sec-top reveal">
@@ -341,6 +342,8 @@ footer a:hover{color:var(--accent)}
   </div>
 </section>
 
+</div>
+
 <section id="contact">
   <div class="wrap">
     <div class="c-grid">
@@ -435,6 +438,7 @@ const SB_URL = 'https://elrsrrvvuhfbkmxnvtod.supabase.co';
 const SB_KEY = 'sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
 const SB_HDR = { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY };
 window.__SB = null;
+var SB_DOC = null;
 
 function sbLang(){
   const l = document.documentElement.lang || 'en';
@@ -459,6 +463,8 @@ function sbRender(){
   const d = window.__SB; if (!d) return;
   const map = {};
   (d.set || []).forEach(function(r){ map[r.key] = sbPick(r,'value'); });
+  SB_SET.btn_visit = map['btn_visit'] || ''; SB_SET.btn_dl = map['btn_dl'] || '';
+  try { SB_DOC = map['page_home'] ? JSON.parse(map['page_home']) : null; } catch(e) { SB_DOC = null; }
   document.querySelectorAll('[data-k]').forEach(function(el){
     const v = map[el.getAttribute('data-k')];
     if (v !== undefined && v !== null && v !== '') el.innerHTML = v;
@@ -484,6 +490,7 @@ function sbRender(){
     if (!list.length) return;
     box.innerHTML = list.map(sbCard).join('');
   });
+  try { renderDoc(); } catch(e) { console.warn('文档渲染失败', e); }
   document.querySelectorAll('.nav ul a, .links a').forEach(function(a){
     const href = (a.getAttribute('href') || '');
     if (href.indexOf('#') !== 0) return;
@@ -502,6 +509,45 @@ function sbRender(){
     sbRender();
   }).catch(function(e){ console.warn('动态内容读取失败，保留静态内容', e); });
 })();
+
+
+/* ===== 按「页面文档」渲染版块（作者 App 那种：结构存 JSON，随便加删排）===== */
+function _tri(o){ if(!o) return ''; const l=sbLang(); return o[l] || o.en || o.zh || ''; }
+function _visitLabel(link){ return /\.(apk|ipa)(\?|$)/i.test(link||'') ? (SB_SET.btn_dl||'Android 下载 ↓') : (SB_SET.btn_visit||'访问 →'); }
+var SB_SET = {};
+function _cardHtml(c){
+  const t=_tri(c.title), b=_tri(c.body), link=c.link||'', img=c.image||'', vid=c.video||'';
+  const btn = link ? ('<p style="margin-top:12px"><a href="'+link+'" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">'+_visitLabel(link)+'</a></p>') : '';
+  const media = img ? ('<img src="'+img+'" loading="lazy" style="width:100%;border-radius:12px;margin-top:10px">') : '';
+  const video = vid ? ('<video src="'+vid+'" controls style="width:100%;border-radius:12px;margin-top:10px"></video>') : '';
+  return '<div class="why reveal in"><h3>'+t+'</h3><p>'+b+'</p>'+media+video+btn+'</div>';
+}
+function _headHtml(s){
+  const tag=_tri(s.tag), title=_tri(s.title), sub=_tri(s.sub);
+  return '<div class="wrap"><div class="sec-top reveal in"><div>'
+       + (tag ? '<span class="tag">'+tag+'</span>' : '')
+       + '<h2 class="h2">'+title+'</h2>'
+       + (sub ? '<p class="sub">'+sub+'</p>' : '')
+       + '</div></div></div>';
+}
+function _secHtml(s){
+  const kind = s.kind || 'cards';
+  if (kind === 'contact') return '';                      // 联系区由【文案】维护
+  const cards = (s.cards || []).filter(function(c){ return c; });
+  const inner = (kind === 'story')
+    ? ('<div class="wrap"><div class="story-grid"><div class="storycard reveal in"><b>'
+        + (cards[0] ? _tri(cards[0].title) : '') + '</b></div><div class="story reveal in">'
+        + (cards[0] ? '<p>'+_tri(cards[0].body)+'</p>' : '') + '</div></div></div>')
+    : ('<div class="wrap"><div class="why-grid">' + cards.map(_cardHtml).join('') + '</div></div>');
+  return '<section id="'+s.key+'">' + _headHtml(s) + inner + '</section>';
+}
+function renderDoc(){
+  const raw = SB_DOC; if (!raw) return;
+  const box = document.getElementById('sections'); if (!box) return;
+  const secs = (raw.sections || []).filter(function(s){ return s && s.visible !== false; });
+  if (!secs.length) return;
+  box.innerHTML = secs.map(_secHtml).join('');
+}
 
 /* --- 手机端汉堡菜单：打开时从桌面导航克隆（跟着当前语言）--- */
 (function(){
