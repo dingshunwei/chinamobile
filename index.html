@@ -495,20 +495,7 @@ function sbRender(){
     box.innerHTML = list.map(sbCard).join('');
   });
   try { renderDoc(); } catch(e) { console.warn('文档渲染失败', e); }
-  try {
-    const cDoc = null;
-    const cEl = document.getElementById('contact');
-    if (cEl) {
-      if (!cDoc || cDoc.visible === false) { cEl.style.display = 'none'; }
-      else {
-        cEl.style.display = '';
-        const tg = _tri(cDoc.tag), tt = _tri(cDoc.title), sb = _tri(cDoc.sub);
-        const tgEl = cEl.querySelector('.tag'), h2El = cEl.querySelector('.h2');
-        if (tgEl) tgEl.innerHTML = tg;        // 清空也照做
-        if (h2El) h2El.innerHTML = tt;
-      }
-    }
-  } catch(e) { console.warn('联系区处理失败', e); }
+
   const navOrder = (d.nav || []).filter(function(n){ return n.visible !== false; });
   function buildLinks(){
     return navOrder.map(function(n){
@@ -601,7 +588,7 @@ function renderDoc(){
   }
   // 品牌 / 页脚
   const br=d.brand||{};
-  _setText('.logo b', _tri(br.zh)); _setText('.logo i', _tri(br.en));
+  _setText('.logo b', (br.zh&&br.zh.zh)||''); _setText('.logo i', (br.en&&(br.en.en||br.en.zh))||'');
   const f=d.footer||{}; const fs=document.querySelector('footer .wrap > span'); if(fs) fs.innerHTML=_tri(f.copy);
   // 菜单（顶栏 + 页脚），从 inMenu 的导航项生成
   const menu=(d.items||[]).filter(function(it){ return it && it.visible!==false && it.inMenu!==false && it.kind!=='hero' && it.kind!=='footer'; });
