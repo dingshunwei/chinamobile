@@ -1,204 +1,429 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
+<script>document.documentElement.className+=' js';</script>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex, follow">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Made in China Phones | Top Chinese Smartphone Brands</title>
-<meta name="description" content="Discover Made in China phones — HUAWEI, Xiaomi, OPPO, vivo, HONOR, OnePlus, realme, Meizu, Redmi, iQOO, nubia, ZTE. Top Chinese smartphone brands.">
-<meta name="keywords" content="Made in China phones, China smartphone brands, HUAWEI, Xiaomi, OPPO, vivo, HONOR">
-<link rel="canonical" href="https://www.chinamobile.uk/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.chinamobile.uk/">
-<meta property="og:title" content="Made in China Phones | Top Chinese Smartphone Brands">
-<meta property="og:description" content="Discover Made in China phones — HUAWEI, Xiaomi, OPPO, vivo, HONOR, OnePlus, realme, Meizu, Redmi, iQOO, nubia, ZTE. Top Chinese smartphone brands.">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Made in China Phones | Top Chinese Smartphone Brands">
-<meta name="twitter:description" content="Discover Made in China phones — HUAWEI, Xiaomi, OPPO, vivo, HONOR, OnePlus, realme, Meizu, Redmi, iQOO, nubia, ZTE. Top Chinese smartphone brands.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>丁创世 DingCreate · 好产品，值得被看见</title>
+<meta name="description" content="丁创世 —— 一个新锐产品品牌。用心做好每一件产品，从第一件开始。">
 <style>
 :root{
-  --bg:#f6f7fb; --ink:#1a1a24; --ink-soft:#5b5b6b; --card:#fff; --line:#ececf3;
-  --brand:#ff6a1a; --radius:18px; --shadow:0 8px 24px rgba(30,30,60,.07);
+  --bg:#f7f4ee; --bg2:#efe9df; --ink:#16161a; --ink2:#3a3a42; --mut:#7d7d88;
+  --accent:#e4783b; --accent2:#c95f24; --line:#e2dbcf; --card:#fffdfa;
+  --disp:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --serif:"Songti SC","Noto Serif SC",Georgia,serif;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
-.hero{background:linear-gradient(135deg,#ff8a3d,#ff6a1a 55%,#e8550a);color:#fff;padding:26px 18px 22px;text-align:center;position:relative;}
-.hero .hlp{position:absolute;top:16px;right:16px;background:#fff;color:#e8531e;border:none;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;}
-.hero .ccl{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.16);color:#fff;text-decoration:none;padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:700;}
-.hero .ccl:hover{background:rgba(255,255,255,.28);}
-.hero .hlp:hover{background:#ffe9d8;}
-.footer .ccf{color:#e8550a;text-decoration:none;font-weight:700;}
-.footer .ccf:hover{text-decoration:underline;}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
 
-.hero h1{font-size:22px;font-weight:800;letter-spacing:.5px;}
-.hero p{font-size:13.5px;opacity:.9;margin-top:6px;}
-.wrap{max-width:900px;margin:0 auto;padding:18px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 12px;text-align:center;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;}
-.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(30,30,60,.12);}
-.badge{width:64px;height:64px;border-radius:18px;display:inline-grid;place-items:center;color:#fff;font-size:26px;font-weight:800;margin-bottom:12px;box-shadow:0 6px 14px rgba(0,0,0,.12);}
-.card .en{font-size:16px;font-weight:700;letter-spacing:.3px;}
-.card .zh{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
-.card .tag{font-size:11.5px;color:var(--ink-soft);margin-top:6px;}
-.card .desc{font-size:11.5px;color:var(--ink-soft);margin-top:6px;line-height:1.5;}
-.qa{max-width:760px;margin:24px auto 0;padding:0 18px;}
-.qa h2{font-size:18px;font-weight:800;margin-bottom:6px;}
-.qa>.lead{font-size:13.5px;color:var(--ink-soft);margin-bottom:12px;line-height:1.7;}
-.qa details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:8px;}
-.qa details summary{cursor:pointer;font-weight:700;font-size:14px;}
-.qa details p,.qa details ul{font-size:13px;color:#444;line-height:1.75;margin-top:8px;}
-.qa details ul{padding-left:18px;}
-.qa details li{margin-bottom:5px;}
+/* nav */
+header{position:fixed;top:0;left:0;right:0;z-index:60;transition:.45s}
+header.solid{background:rgba(247,244,238,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;height:74px;gap:34px}
+.logo{display:flex;align-items:baseline;gap:8px;font-weight:800;letter-spacing:.02em}
+.logo b{font-size:22px}
+.logo i{font-style:normal;font-size:10px;letter-spacing:.3em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.nav ul{display:flex;gap:30px;list-style:none;margin-left:auto;font-size:14.5px;font-weight:500;color:var(--ink2)}
+.nav ul a{position:relative;padding:5px 0;transition:.3s}
+.nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:.3s}
+.nav ul a:hover{color:var(--ink)}.nav ul a:hover::after{width:100%}
+.lang{font-size:12.5px;font-weight:600;color:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:5px 13px;cursor:pointer;transition:.3s}
+.lang:hover{background:var(--accent);color:#fff}
+.lang{padding:0;position:relative}
+.lang select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:inherit;
+  font:inherit;font-weight:600;cursor:pointer;padding:5px 26px 5px 13px;outline:none}
+.lang select option{color:var(--ink);background:#fff}
+.lang::after{content:"\25BE";position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  pointer-events:none;font-size:10px}
+.buy{font-size:13.5px;font-weight:600;background:var(--ink);color:#fff;padding:9px 20px;border-radius:999px;transition:.3s}
+.buy:hover{background:var(--accent)}
 
-.footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin:22px 0 30px;}
+/* hero */
+.hero{padding:150px 0 90px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative;z-index:2}
+.hero::before{content:"";position:absolute;top:-10%;right:-6%;width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle,rgba(228,120,59,.20),transparent 66%);filter:blur(10px)}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+.kicker::before{content:"";width:34px;height:2px;background:var(--accent)}
+h1{font-size:clamp(40px,5.6vw,68px);line-height:1.08;font-weight:800;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--accent);position:relative;white-space:nowrap}
+h1 em::after{content:"";position:absolute;left:0;bottom:6px;width:100%;height:12px;background:rgba(228,120,59,.18);z-index:-1;border-radius:3px}
+.lead{margin-top:26px;font-size:17px;color:var(--mut);max-width:520px}
+.cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:15px 30px;border-radius:999px;font-size:15px;font-weight:600;transition:.3s;border:2px solid transparent;cursor:pointer}
+.btn.pri{background:var(--accent);color:#fff;box-shadow:0 14px 30px -12px rgba(228,120,59,.7)}
+.btn.pri:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn.gho{border-color:var(--ink);color:var(--ink)}
+.btn.gho:hover{background:var(--ink);color:#fff}
+.trust{margin-top:34px;display:flex;gap:26px;font-size:13px;color:var(--mut);flex-wrap:wrap}
+.trust span{display:flex;align-items:center;gap:7px}
+.trust b{color:var(--ink);font-weight:700}
 
-.btn{display:block;text-align:center;background:var(--brand);color:#fff;text-decoration:none;padding:14px 20px;border-radius:12px;font-size:16px;font-weight:600;margin:12px 0;transition:transform .2s,background .2s;}
-.btn:hover{background:#e8550a;transform:translateY(-1px);}
-.btn.secondary{background:var(--card);color:var(--brand);border:2px solid var(--brand);}
-.dl{max-width:760px;margin:26px auto 0;padding:0 18px;}
-.dl h2{font-size:18px;font-weight:800;text-align:center;margin-bottom:4px;}
-.dl .note{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-bottom:10px;}
+/* product stage */
+.stage{position:relative;aspect-ratio:1/1.02;border-radius:26px;background:linear-gradient(150deg,#fffdfa,#efe7db);border:1px solid var(--line);
+  box-shadow:0 40px 80px -50px rgba(60,40,20,.55);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stage::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(0,0,0,.045) 1px,transparent 1px);background-size:22px 22px}
+.ph{width:62%;aspect-ratio:1/1;border-radius:20px;background:linear-gradient(145deg,var(--accent),#f0a56f);display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;letter-spacing:.1em;box-shadow:0 30px 50px -22px rgba(228,120,59,.75);position:relative}
+.ph span{font-size:13px;opacity:.9;letter-spacing:.2em}
+.badge{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px;box-shadow:0 18px 40px -24px rgba(0,0,0,.5);font-size:12.5px;font-weight:600}
+.badge small{display:block;color:var(--mut);font-weight:500;font-size:11px;letter-spacing:.06em}
+.badge.a{top:8%;left:6%}
+.badge.b{bottom:9%;right:5%}
+.badge .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3fbf7f;margin-right:6px}
 
-.crosslink{max-width:760px;margin:16px auto 0;padding:0 18px;text-align:center;}
-.cid{display:inline-block;background:#1a1a24;color:#fff;text-decoration:none;padding:11px 22px;border-radius:999px;font-size:14px;font-weight:700;transition:transform .2s,background .2s;}
-.cid:hover{background:#333;transform:translateY(-1px);}
+/* marquee */
+.marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;overflow:hidden;white-space:nowrap;background:var(--bg2)}
+.marq div{display:inline-block;animation:slide 26s linear infinite;font-size:13.5px;font-weight:600;letter-spacing:.16em;color:var(--mut);text-transform:uppercase}
+.marq span{margin:0 30px}
+@keyframes slide{to{transform:translateX(-50%)}}
+.marq i{font-style:normal;color:var(--accent)}
 
-.topbar{display:block;text-align:center;background:#1a1a24;color:#fff;padding:12px 16px;font-size:14.5px;font-weight:700;text-decoration:none;letter-spacing:.3px;}
-.topbar:hover{background:#333;}
-.topbar span{color:#ffd27a;}
+/* sections */
+section{padding:110px 0}
+.h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.sec-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:50px;flex-wrap:wrap}
+.sub{color:var(--mut);font-size:16px;max-width:440px;margin-top:12px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block}
 
-.help-fab{position:fixed;right:18px;bottom:18px;z-index:9999;background:#1a1a24;color:#fff;border:none;border-radius:999px;padding:13px 22px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35);transition:transform .2s,background .2s;}
-.help-fab:hover{transform:translateY(-2px);background:#2a2a35;}
-.help-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:10000;padding:18px;}
-.help-box{background:#fff;color:#222;border-radius:16px;max-width:420px;width:100%;padding:22px;box-sizing:border-box;position:relative;direction:ltr;text-align:left;}
-.help-box h3{margin:0 0 14px;font-size:20px;}
-.help-close{position:absolute;right:12px;top:10px;background:none;border:none;font-size:24px;color:#999;cursor:pointer;}
-.help-box input,.help-box textarea{width:100%;box-sizing:border-box;margin:8px 0;padding:11px;border:1px solid #ddd;border-radius:10px;font-size:15px;font-family:inherit;}
-.help-box textarea{min-height:110px;resize:vertical;}
-.help-box .hsend{width:100%;padding:12px;border:none;border-radius:10px;background:#1a1a24;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:6px;}
-.help-box .hsend:hover{background:#2a2a35;}
-#helpDone{display:none;text-align:center;color:#1a9d55;font-weight:700;padding:10px 0;}
+/* product grid */
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{font-size:13px;font-weight:600;padding:8px 17px;border-radius:999px;border:1.5px solid var(--line);cursor:pointer;transition:.25s;background:#fff}
+.chip.on,.chip:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.4s;display:flex;flex-direction:column}
+.pcard:hover{transform:translateY(-8px);box-shadow:0 36px 60px -40px rgba(60,40,20,.6);border-color:#d8cdbb}
+.pimg{aspect-ratio:1/.82;background:linear-gradient(150deg,#f1ebe0,#e3d9c9);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pimg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1px);background-size:18px 18px}
+.pimg .box{width:52%;aspect-ratio:1/1;border-radius:14px;background:linear-gradient(150deg,#fff,#eee6d8);border:1px solid #e0d6c6;display:flex;align-items:center;justify-content:center;color:#b6a994;font-size:11px;font-weight:700;letter-spacing:.18em;z-index:2}
+.pimg .pill{position:absolute;top:12px;left:12px;z-index:3;background:#fff;border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.08em}
+.pbody{padding:22px 22px 24px;flex:1;display:flex;flex-direction:column}
+.pbody h3{font-size:18.5px;font-weight:700}
+.pbody p{font-size:13.5px;color:var(--mut);margin-top:8px;flex:1}
+.pfoot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.pfoot .go{font-size:13px;font-weight:700;color:var(--accent)}
+.pfoot .price{font-size:14px;font-weight:700}
+.pfoot .price small{color:var(--mut);font-weight:500;font-size:12px}
+
+/* why */
+#why{background:var(--ink);color:#efece6}
+#why .h2{color:#fff}
+#why .sub{color:#9a9791}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:8px}
+.why{padding:30px 26px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.03);transition:.4s}
+.why:hover{background:rgba(228,120,59,.10);border-color:rgba(228,120,59,.5);transform:translateY(-6px)}
+.why .n{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.16em}
+.why h3{font-size:19px;margin:16px 0 10px;color:#fff}
+.why p{font-size:13.5px;color:#9a9791}
+/* App 版块：浅色区里的卡片（复用 .why 的结构，只换配色）*/
+#apps .why-grid{grid-template-columns:repeat(2,1fr)}
+#web .why-grid{grid-template-columns:repeat(auto-fit,minmax(228px,1fr))}
+#apps .why,#web .why{background:#fff;border-color:rgba(0,0,0,.08)}
+#apps .why h3,#web .why h3{color:var(--ink)}
+#apps .why p,#web .why p{color:#6b6862}
+#apps .btn{margin-top:6px}
+
+/* story */
+.story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.storycard{aspect-ratio:1/.92;border-radius:24px;background:linear-gradient(150deg,#f0e8dc,#e0d4c2);border:1px solid var(--line);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:28px}
+.storycard::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(0,0,0,.045) 1px,transparent 1px);background-size:20px 20px}
+.storycard b{font-family:var(--serif);font-size:27px;line-height:1.4;color:#2b2620;position:relative;z-index:2}
+.story p{font-size:16.5px;color:var(--ink2);margin-bottom:18px}
+.story .sign{margin-top:26px;font-family:var(--serif);font-size:22px;color:var(--accent)}
+
+/* contact */
+#contact{background:var(--bg2)}
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.c-grid .h2{margin-bottom:18px}
+.c-info p{display:flex;gap:14px;font-size:15px;color:var(--ink2);margin-bottom:15px}
+.c-info p b{color:var(--accent);font-weight:700;min-width:58px}
+form{display:grid;gap:15px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+input,textarea{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:15px 16px;font-family:var(--disp);font-size:14.5px;color:var(--ink);transition:.25s}
+input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(228,120,59,.12)}
+textarea{min-height:128px;resize:vertical}
+form .btn{justify-self:start}
+
+footer{padding:44px 0 34px;font-size:13px;color:var(--mut);border-top:1px solid var(--line);background:var(--bg)}
+footer .row{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+footer .links{display:flex;gap:22px}
+footer a:hover{color:var(--accent)}
+
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+
+@media(max-width:980px){
+  .nav ul,.lang,.buy{display:none}
+  .hero .wrap,.story-grid,.c-grid{grid-template-columns:1fr;gap:44px}
+  .grid{grid-template-columns:1fr 1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  section{padding:78px 0}
+}
+@media(max-width:600px){.grid,.why-grid,.f2{grid-template-columns:1fr}}
 </style>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebSite",
-  "name":"Made in China Phones | Top Chinese Smartphone Brands",
-  "url":"https://www.chinamobile.uk/",
-  "description":"Discover Made in China phones — HUAWEI, Xiaomi, OPPO, vivo, HONOR, OnePlus, realme, Meizu, Redmi, iQOO, nubia, ZTE. Top Chinese smartphone brands.",
-  "inLanguage":"en"
-}
-</script>
-  <link rel="alternate" hreflang="ar" href="https://www.chinamobile.uk/ar/" />
-  <link rel="alternate" hreflang="zh" href="https://www.chinamobile.uk/zh/" />
-  <link rel="alternate" hreflang="de" href="https://www.chinamobile.uk/de/" />
-  <link rel="alternate" hreflang="ru" href="https://www.chinamobile.uk/ru/" />
-  <link rel="alternate" hreflang="fr" href="https://www.chinamobile.uk/fr/" />
-  <link rel="alternate" hreflang="es" href="https://www.chinamobile.uk/es/" />
-  <link rel="alternate" hreflang="it" href="https://www.chinamobile.uk/it/" />
-  <link rel="alternate" hreflang="ja" href="https://www.chinamobile.uk/ja/" />
-  <link rel="alternate" hreflang="ko" href="https://www.chinamobile.uk/ko/" />
-  <link rel="alternate" hreflang="pt" href="https://www.chinamobile.uk/pt/" />
-  <link rel="alternate" hreflang="nl" href="https://www.chinamobile.uk/nl/" />
-  <link rel="alternate" hreflang="tr" href="https://www.chinamobile.uk/tr/" />
-  <link rel="alternate" hreflang="hi" href="https://www.chinamobile.uk/hi/" />
-  <link rel="alternate" hreflang="fa" href="https://www.chinamobile.uk/fa/" />
-  <link rel="alternate" hreflang="ur" href="https://www.chinamobile.uk/ur/" />
-  <link rel="alternate" hreflang="he" href="https://www.chinamobile.uk/he/" />
-  <link rel="alternate" hreflang="vi" href="https://www.chinamobile.uk/vi/" />
-  <link rel="alternate" hreflang="pl" href="https://www.chinamobile.uk/pl/" />
-  <link rel="alternate" hreflang="en" href="https://www.chinamobile.uk/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.chinamobile.uk/" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Are Chinese phone brands available outside China?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Several brands sell global models in Europe, Asia and Latin America; others are mainly sold in China and are widely available through import channels. Global models normally include Google services and broader band support."}}, {"@type": "Question", "name": "Do these phones support Google Play?", "acceptedAnswer": {"@type": "Answer", "text": "Global models ship with Google Play. China-market models usually do not, though Play can often be installed manually. Check the ROM variant before buying."}}, {"@type": "Question", "name": "How do I check whether a model works with my carrier?", "acceptedAnswer": {"@type": "Answer", "text": "Compare the model’s supported LTE/5G bands with your carrier’s bands, then check the ROM (global or China). Send us the exact model and we will check it for you."}}, {"@type": "Question", "name": "Why do two phones with the same name have different specs?", "acceptedAnswer": {"@type": "Answer", "text": "Brands often reuse a name across markets with different bands, memory options, chargers or software. The model code (international vs China SKU) is the reliable identifier."}}, {"@type": "Question", "name": "What can I watch on this site?", "acceptedAnswer": {"@type": "Answer", "text": "Each brand card links to a video page for that brand’s devices, and the Mobile China app shows the same showcase on your phone."}}]}</script>
 </head>
 <body>
-<div class="hero"><a class="ccl" href="https://chinacar.bid" target="_blank">🚗 China Car</a><button class="hlp" onclick="openHelp()">Help</button><h1>📱 Chinese Phone Brands</h1><p>Top Domestic Chinese Smartphone Brands</p></div>
-<div class="wrap"><div class="grid" id="g"></div></div>
 
-  <div class="dl">
-    <h2>Get the App</h2>
-    <div class="note">Read diaries &amp; browse on mobile</div>
-    <a class="btn" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk" download>📥 Android · Download App</a>
-    <a class="btn secondary" href="https://apps.apple.com/app/mobile-china/id6807377172" target="_blank">🍎 App Store</a><a class="btn secondary" href="https://testflight.apple.com/join/vzx6npWm" target="_blank">🍎 iOS · TestFlight</a>
+<header id="hd">
+  <div class="wrap nav">
+    <a class="logo" href="#"><b>丁创世</b><i>DingCreate</i></a>
+    <ul>
+      <li><a href="#apps">App</a></li>
+      <li><a href="#web">Web</a></li>
+      <li><a href="#why">为什么</a></li>
+      <li><a href="#story">品牌</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+    <div class="lang" id="langSw"><select id="langSel" aria-label="Language"><option value="en">English</option><option value="zh">中文</option><option value="ar">العربية</option></select></div>
+    <a class="buy" href="#contact">立即咨询</a>
   </div>
-    <section class="qa">
-    <h2>Chinese phone brands, in one page</h2>
-    <p class="lead">Chinese smartphone brands cover almost every price point and form factor: camera flagships, foldables, gaming phones and value models. One-line notes on each brand, plus the questions we get asked most, are below — tap any line to expand.</p>
-    <details><summary>Brands at a glance</summary>
-      <ul>
-      <li><b>HUAWEI</b> — Flagship imaging and the HarmonyOS ecosystem; Mate and P-series lead on camera hardware.</li>
-      <li><b>Xiaomi</b> — Value-to-flagship line-up plus a smart-home ecosystem tied together by HyperOS.</li>
-      <li><b>OPPO</b> — Camera-first flagships and fast-charging technology; Find and Reno are the main lines.</li>
-      <li><b>vivo</b> — Imaging-focused flagships running OriginOS; X and V series are the best known.</li>
-      <li><b>HONOR</b> — Independent since 2020; strong foldables (Magic V) and competitive mid-range models.</li>
-      <li><b>OnePlus</b> — Performance-first flagships with OxygenOS and a long fast-charging heritage.</li>
-      <li><b>realme</b> — Youth- and value-oriented brand; GT series targets gaming performance.</li>
-      <li><b>Meizu</b> — Design-led phones with the Flyme interface; a smaller, polished line-up.</li>
-      <li><b>Redmi</b> — Xiaomi's value sub-brand: large batteries, durable builds, aggressive pricing.</li>
-      <li><b>iQOO</b> — vivo's performance and gaming line, with fast charging as a headline feature.</li>
-      <li><b>nubia</b> — Gaming phones under the RedMagic name: active cooling and shoulder triggers.</li>
-      </ul>
-    </details>
-    <details><summary>What “Made in China phones” means here</summary><p>“Made in China phones” here means handsets designed and manufactured by Chinese brands — HUAWEI, Xiaomi, OPPO, vivo, HONOR, OnePlus, realme, Meizu, Redmi, iQOO and nubia. Most of them ship both a China-market version and a global version: the global one usually adds multi-band LTE/5G and Google services, while the China version may use a different band set and software build. Two phones with the same name can therefore differ in bands, ROM and charger — check the band list and the ROM variant first.</p><p>Brands also specialise differently: imaging (HUAWEI, vivo, OPPO), value and ecosystem (Xiaomi, Redmi, realme), performance and gaming (OnePlus, iQOO, nubia/RedMagic), and foldables (HONOR Magic V, HUAWEI Mate X). Open a brand card above to watch its devices.</p></details>
-    <details><summary>Are Chinese phone brands available outside China?</summary><p>Yes. Several brands sell global models in Europe, Asia and Latin America; others are mainly sold in China and are widely available through import channels. Global models normally include Google services and broader band support.</p></details>
-    <details><summary>Do these phones support Google Play?</summary><p>Global models ship with Google Play. China-market models usually do not, though Play can often be installed manually. Check the ROM variant before buying.</p></details>
-    <details><summary>How do I check whether a model works with my carrier?</summary><p>Compare the model’s supported LTE/5G bands with your carrier’s bands, then check the ROM (global or China). Send us the exact model and we will check it for you.</p></details>
-    <details><summary>Why do two phones with the same name have different specs?</summary><p>Brands often reuse a name across markets with different bands, memory options, chargers or software. The model code (international vs China SKU) is the reliable identifier.</p></details>
-    <details><summary>What can I watch on this site?</summary><p>Each brand card links to a video page for that brand’s devices, and the Mobile China app shows the same showcase on your phone.</p></details>
-  </section>
-<div class="footer">China Mobile · Showcase</div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker">New Brand · Since 2026</span>
+      <h1 class="reveal">把每一件产品<br>做到<em>最好</em></h1>
+      <p class="lead reveal">丁创世，一个刚刚起步的新锐品牌。我们不急着做大，只想着把产品本身做到位 —— 从选材、设计到出品，每一步都认真对待。</p>
+      <div class="cta reveal">
+        <a class="btn pri" href="#apps">看看我们的 App →</a>
+        <a class="btn gho" href="#contact">聊聊合作</a>
+      </div>
+      <div class="trust reveal">
+        <span>✦ <b>源头直供</b></span>
+        <span>✦ <b>用心选品</b></span>
+        <span>✦ <b>一对一服务</b></span>
+      </div>
+    </div>
+    <div class="stage reveal">
+      <div class="badge a"><span class="dot"></span>现货供应<small>Fast Delivery</small></div>
+      <div class="ph"><span>PRODUCT 01</span></div>
+      <div class="badge b">品质保障<small>Quality First</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="marq"><div>
+  <span>好产品，值得被看见</span><i>✦</i>
+  <span>源头工厂 · 品质直供</span><i>✦</i>
+  <span>用心选品 · 认真出品</span><i>✦</i>
+  <span>好产品，值得被看见</span><i>✦</i>
+  <span>源头工厂 · 品质直供</span><i>✦</i>
+  <span>用心选品 · 认真出品</span><i>✦</i>
+</div></div>
+
+
+
+<section id="apps">
+  <div class="wrap">
+    <div class="sec-top reveal">
+      <div>
+        <span class="tag">Our Apps</span>
+        <h2 class="h2">我们的 App</h2>
+        <p class="sub">手机端小工具，Android 直接下载安装。</p>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why reveal">
+        <div class="n">01</div>
+        <h3>Mobile China</h3>
+        <p>看中国手机品牌与机型的小工具。</p>
+        <p style="margin-top:14px"><a class="btn pri" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk">Android 下载 ↓</a></p>
+      </div>
+      <div class="why reveal">
+        <div class="n">02</div>
+        <h3>China Agent</h3>
+        <p>与中国做生意的小助手。</p>
+        <p style="margin-top:14px"><a class="btn pri" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/china-agent-customer.apk">Android 下载 ↓</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="web">
+  <div class="wrap">
+    <div class="sec-top reveal">
+      <div>
+        <span class="tag">Our Sites</span>
+        <h2 class="h2">我的站点</h2>
+        <p class="sub">我自己做的一堆网站，随手列在这儿。</p>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why reveal">
+        <div class="n">01</div>
+        <h3>China Agent</h3>
+        <p>China Bunny &amp; 13 countries · trade with China</p>
+        <p style="margin-top:12px"><a href="https://www.agentchina.uk" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">访问 →</a></p>
+      </div>
+      <div class="why reveal">
+        <div class="n">02</div>
+        <h3>Mobile China</h3>
+        <p>Top Chinese smartphone brands</p>
+        <p style="margin-top:12px"><a href="https://www.chinamobile.uk" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">访问 →</a></p>
+      </div>
+      <div class="why reveal">
+        <div class="n">03</div>
+        <h3>China Cars</h3>
+        <p>Top Chinese auto brands</p>
+        <p style="margin-top:12px"><a href="https://www.chinacar.bid" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">访问 →</a></p>
+      </div>
+      <div class="why reveal">
+        <div class="n">04</div>
+        <h3>AI China</h3>
+        <p>AI compute &amp; server hardware</p>
+        <p style="margin-top:12px"><a href="https://www.aichina.bid" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">访问 →</a></p>
+      </div>
+      <div class="why reveal">
+        <div class="n">05</div>
+        <h3>SemiBid</h3>
+        <p>Chinese semiconductor datasheet library</p>
+        <p style="margin-top:12px"><a href="https://www.semi.bid" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">访问 →</a></p>
+      </div>
+      <div class="why reveal">
+        <div class="n">06</div>
+        <h3>FictionChina</h3>
+        <p>Free Chinese novels: cultivation &amp; wuxia</p>
+        <p style="margin-top:12px"><a href="https://www.fictionchina.com" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">访问 →</a></p>
+      </div>
+      <div class="why reveal">
+        <div class="n">07</div>
+        <h3>上海宁波日记</h3>
+        <p>Shanghai&ndash;Ningbo diary: EVs &amp; Chinese phones</p>
+        <p style="margin-top:12px"><a href="https://www.sldiary.com" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">访问 →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-top reveal">
+      <div><span class="tag">Why Us</span><h2 class="h2">为什么选择我们</h2>
+      <p class="sub">体量小有体量小的好处 —— 灵活、专注、每一单都当回事。</p></div>
+    </div>
+    <div class="why-grid">
+      <div class="why reveal"><div class="n">01</div><h3>源头直供</h3><p>减少中间环节，同等品质价格更实在。</p></div>
+      <div class="why reveal"><div class="n">02</div><h3>用心选品</h3><p>每一件产品都亲自把关，不好不推。</p></div>
+      <div class="why reveal"><div class="n">03</div><h3>灵活定制</h3><p>支持小批量与定制需求，起步阶段更好谈。</p></div>
+      <div class="why reveal"><div class="n">04</div><h3>一对一服务</h3><p>有问题直接找人，不踢皮球不敷衍。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap">
+    <div class="sec-top reveal"><div><span class="tag">Our Story</span><h2 class="h2">品牌故事</h2></div></div>
+    <div class="story-grid">
+      <div class="storycard reveal"><b>「不想着做大，<br>只想着做好。」</b></div>
+      <div class="story reveal">
+        <p>丁创世是一个刚刚起步的品牌。没有华丽的履历，也没有宏大的故事 —— 我们相信，产品本身才是最好的名片。</p>
+        <p>所以我们把精力放在最实在的地方：找到靠谱的货源、把品质盯住、把服务做细。第一件产品做扎实了，第二件才有意义。</p>
+        <p>如果你也认同「产品说话」，欢迎一起聊聊。</p>
+        <div class="sign">—— 丁创世</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="c-grid">
+      <div class="reveal">
+        <span class="tag">Contact</span>
+        <h2 class="h2">聊聊你的需求</h2>
+        <div class="c-info">
+          <p><b>邮箱</b>hello@dingnew.com</p>
+          <p><b>微信</b>dingnew（待填）</p>
+          <p><b>电话</b>+86 ——（待填）</p>
+          <p><b>地址</b>——（待填）</p>
+        </div>
+        <div class="c-info" style="margin-top:22px">
+          <p><b>我们的 App</b></p>
+          <p><a href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk" style="color:var(--accent);font-weight:600">Mobile China · Android 下载 ↓</a></p>
+          <p><a href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/china-agent-customer.apk" style="color:var(--accent);font-weight:600">China Agent · Android 下载 ↓</a></p>
+        </div>
+      </div>
+      <form class="reveal" onsubmit="event.preventDefault();this.querySelector('button').textContent='已收到 ✓（演示）'">
+        <div class="f2"><input placeholder="您的称呼" required><input placeholder="联系方式（微信/电话）"></div>
+        <input type="email" placeholder="邮箱（选填）">
+        <textarea placeholder="想了解什么产品？或说说你的需求…"></textarea>
+        <button class="btn pri" type="submit">发送 →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap row">
+  <span>© 2026 丁创世 DingCreate · 保留所有权利</span>
+  <span class="links"><a href="#apps">App</a><a href="#web">Web</a><a href="#why">为什么</a><a href="#story">品牌</a><a href="#contact">联系</a></span>
+  <span class="links" style="margin-top:6px">
+    <a href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk">Mobile China 下载</a>
+    <a href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/china-agent-customer.apk">China Agent 下载</a>
+  </span>
+</div></footer>
+
 <script>
-const SB='https://elrsrrvvuhfbkmxnvtod.supabase.co/rest/v1',KEY='sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
-var H={}; H['api'+'key']=KEY; H['Author'+'ization']='Bearer '+KEY;
-function slug(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
-function lang(){return (document.documentElement.getAttribute('lang')||'en').slice(0,2);}
-function pre(){var l=lang();return l==='en'?'':l+'/';}
-var COPY={};
-fetch(SB+'/trade_settings?select=value&' + 'key=' + 'eq.brand_copy',{headers:H})
-.then(function(r){return r.json();}).then(function(rows){try{COPY=JSON.parse((rows[0]||{}).value||'{}');}catch(e){COPY={};}})
-.catch(function(){})
-.then(function(){
-fetch(SB+'/brands?select=name,zh,tag,color,icon&site=eq.chinamobile&order=ord.asc',{headers:H})
-.then(function(r){return r.json();}).then(function(brands){
-var g=document.getElementById('g'), L=lang();
-function desc(b){var c=COPY[b.name]||{};return c[L]||c.en||c.zh||'';}
-fetch(SB+'/brand_links?select=brand_key,diary_id&site=eq.chinamobile',{headers:H})
-.then(function(r){return r.json();}).then(function(rows){var dm={};rows.forEach(function(r){dm[r.brand_key]=r.diary_id;});
-g.innerHTML=brands.map(function(b){var href='/'+pre()+'brand/'+slug(b.name)+'.html';var d=dm[b.name];
-var v=d?('https://sldiary.com/browse.html?d='+d+'&lang='+L):'';
-return '<div class="card">'
-+'<a href="'+href+'" style="display:block;text-decoration:none;color:inherit;">'
-+'<div class="badge" style="background:'+b.color+'">'+b.icon+'</div><div class="en">'+b.name+'</div>'
-+(b.zh?'<div class="zh">'+b.zh+'</div>':'')+(b.tag?'<div class="tag">'+b.tag+'</div>':'')
-+(desc(b)?('<div class="desc">'+desc(b)+'</div>'):'')+'</a>'
-+(v?('<a class="vlink" href="'+v+'" style="display:inline-block;margin-top:8px;font-size:12px;color:var(--brand);text-decoration:none;">'+(L==='zh'?'\u25b6 看视频':'\u25b6 Watch video')+'</a>'):'')
-+'</div>';}).join('');
-}).catch(function(){});
-}).catch(function(){});
+const hd=document.getElementById('hd');
+addEventListener('scroll',()=>hd.classList.toggle('solid',scrollY>40));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*70)+'ms';io.observe(el)});
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on')});
+
+const T = {"en": {"产品": "Products", "为什么": "Why Us", "品牌": "Story", "联系": "Contact", "立即咨询": "Get in Touch", "把每一件产品<br>做到<em>最好</em>": "Make every product<br>the <em>best</em> it can be", "丁创世，一个刚刚起步的新锐品牌。我们不急着做大，只想着把产品本身做到位 —— 从选材、设计到出品，每一步都认真对待。": "DingCreate is a young brand that has just got started. We are in no rush to grow big &mdash; we would rather get the product itself right: from materials and design to the finished item, every step gets real attention.", "看看我们的产品 →": "See Our Products &rarr;", "聊聊合作": "Let&rsquo;s Talk", "✦ <b>源头直供</b>": "✦ <b>Direct from source</b>", "✦ <b>用心选品</b>": "✦ <b>Curated with care</b>", "✦ <b>一对一服务</b>": "✦ <b>One-to-one service</b>", "<span class=\"dot\"></span>现货供应<small>Fast Delivery</small>": "<span class=\"dot\"></span>In stock<small>Fast Delivery</small>", "品质保障<small>Quality First</small>": "Quality guaranteed<small>Quality First</small>", "好产品，值得被看见": "Good products deserve to be seen", "源头工厂 · 品质直供": "Direct from the source factory", "用心选品 · 认真出品": "Curated carefully, made seriously", "产品展示": "Products", "产品位现在是占位的 —— 等你的实物照片和名称到位，直接替换即可。": "The product slots are placeholders for now &mdash; drop in your real photos and names whenever they are ready.", "全部": "All", "类别 A": "Category A", "类别 B": "Category B", "类别 C": "Category C", "热销": "Hot", "新品": "New", "即将上架": "Coming soon", "产品名称 01": "Product 01", "产品名称 02": "Product 02", "产品名称 03": "Product 03", "产品名称 04": "Product 04", "产品名称 05": "Product 05", "产品名称 06": "Product 06", "一句话卖点占位：用一句话说清这件产品好在哪。": "Placeholder line: say in one sentence what makes this product good.", "一句话卖点占位：材质 / 功能 / 场景，挑一个最打动人的点。": "Placeholder line: material, function or use case &mdash; pick the one that sells it best.", "一句话卖点占位：突出差异化，别写客套话。": "Placeholder line: highlight what makes it different. Skip the fluff.", "一句话卖点占位：说清给谁用、解决什么问题。": "Placeholder line: who is it for, and what problem does it solve?", "一句话卖点占位：把参数留到详情页，这里只讲感受。": "Placeholder line: leave the specs to the detail page and talk about the feel here.", "一句话卖点占位：新品预告位。": "Placeholder line: teaser slot for the next launch.", "¥ —— <small>起</small>": "¥ —— <small>from</small>", "了解详情 →": "Learn more &rarr;", "敬请期待": "Coming soon", "为什么选择我们": "Why Choose Us", "体量小有体量小的好处 —— 灵活、专注、每一单都当回事。": "Being small has its advantages &mdash; flexible, focused, and every single order matters.", "源头直供": "Direct from Source", "减少中间环节，同等品质价格更实在。": "Fewer middlemen: the same quality at a fairer price.", "用心选品": "Curated with Care", "每一件产品都亲自把关，不好不推。": "We vet every product ourselves. If it is not good, we will not push it.", "灵活定制": "Flexible Customisation", "支持小批量与定制需求，起步阶段更好谈。": "Small batches and custom requests welcome &mdash; easier to work with when you are starting out.", "一对一服务": "One-to-One Service", "有问题直接找人，不踢皮球不敷衍。": "Talk to a real person. No runaround, no brush-off.", "品牌故事": "Our Story", "「不想着做大，<br>只想着做好。」": "&ldquo;Not about getting big.<br>About getting it right.&rdquo;", "丁创世是一个刚刚起步的品牌。没有华丽的履历，也没有宏大的故事 —— 我们相信，产品本身才是最好的名片。": "DingCreate is a brand that has just got started. No glossy track record, no grand story &mdash; we believe the product itself is the best calling card.", "所以我们把精力放在最实在的地方：找到靠谱的货源、把品质盯住、把服务做细。第一件产品做扎实了，第二件才有意义。": "So we put our energy where it counts: finding reliable supply, keeping an eye on quality and getting the service right. Get the first product solid, and the second one means something.", "如果你也认同「产品说话」，欢迎一起聊聊。": "If you also believe products should do the talking, we would love to talk.", "—— 丁创世": "&mdash; DingCreate", "聊聊你的需求": "Tell Us What You Need", "<b>邮箱</b>hello@dingnew.com": "<b>Email</b>hello@dingnew.com", "<b>微信</b>dingnew（待填）": "<b>WeChat</b>dingnew (to be filled)", "<b>电话</b>+86 ——（待填）": "<b>Phone</b>+86 —— (to be filled)", "<b>地址</b>——（待填）": "<b>Address</b>—— (to be filled)", "<b>我们的 App</b>": "<b>Our Apps</b>", "Mobile China · Android 下载 ↓": "Mobile China · Android download &darr;", "China Agent · Android 下载 ↓": "China Agent · Android download &darr;", "发送 →": "Send &rarr;", "© 2026 丁创世 DingCreate · 保留所有权利": "© 2026 DingCreate · All rights reserved", "@您的称呼": "Your name", "@联系方式（微信/电话）": "Contact (WeChat / phone)", "@邮箱（选填）": "Email (optional)", "@想了解什么产品？或说说你的需求…": "Which product are you interested in? Or tell us what you need…", "已收到 ✓（演示）": "Received ✓ (demo)", "Mobile China 下载": "Mobile China download", "China Agent 下载": "China Agent download", "图 01": "Image 01", "图 02": "Image 02", "图 03": "Image 03", "图 04": "Image 04", "图 05": "Image 05", "图 06": "Image 06", "App": "Apps", "我们的 App": "Our Apps", "手机端小工具，Android 直接下载安装。": "Handy little phone apps &mdash; direct Android download and install.", "看中国手机品牌与机型的小工具。": "A handy guide to Chinese smartphone brands and models.", "与中国做生意的小助手。": "A little helper for doing business with China.", "Android 下载 ↓": "Android download &darr;", "Web": "Sites", "我的站点": "Our Sites", "我自己做的一堆网站，随手列在这儿。": "A pile of websites I built &mdash; listed here for convenience.", "访问 →": "Visit &rarr;", "Chinese semiconductor datasheet library": "Chinese semiconductor datasheet library", "看看我们的 App →": "See Our Apps &rarr;"}, "ar": {"产品": "المنتجات", "为什么": "لماذا نحن", "品牌": "قصتنا", "联系": "اتصل بنا", "立即咨询": "تواصل معنا", "把每一件产品<br>做到<em>最好</em>": "نجعل كل منتج<br>في <em>أفضل</em> صورة", "丁创世，一个刚刚起步的新锐品牌。我们不急着做大，只想着把产品本身做到位 —— 从选材、设计到出品，每一步都认真对待。": "DingCreate علامة تجارية ناشئة في بدايتها. لا نستعجل الكبر، بل نريد إتقان المنتج نفسه — من اختيار المواد والتصميم حتى المنتج النهائي، كل خطوة تحظى بعناية حقيقية.", "看看我们的产品 →": "شاهد منتجاتنا ←", "聊聊合作": "لنتحدث", "✦ <b>源头直供</b>": "✦ <b>مباشرة من المصدر</b>", "✦ <b>用心选品</b>": "✦ <b>اختيار بعناية</b>", "✦ <b>一对一服务</b>": "✦ <b>خدمة فردية</b>", "<span class=\"dot\"></span>现货供应<small>Fast Delivery</small>": "<span class=\"dot\"></span>متوفر الآن<small>توصيل سريع</small>", "品质保障<small>Quality First</small>": "جودة مضمونة<small>الجودة أولاً</small>", "好产品，值得被看见": "المنتج الجيد يستحق أن يُرى", "源头工厂 · 品质直供": "من المصنع مباشرة · جودة عالية", "用心选品 · 认真出品": "اختيار دقيق · إنتاج متقن", "产品展示": "المنتجات", "产品位现在是占位的 —— 等你的实物照片和名称到位，直接替换即可。": "أماكن المنتجات مؤقتة حالياً — ضع صورك وأسماءك الحقيقية متى كانت جاهزة.", "全部": "الكل", "类别 A": "الفئة أ", "类别 B": "الفئة ب", "类别 C": "الفئة ج", "热销": "الأكثر مبيعاً", "新品": "جديد", "即将上架": "قريباً", "产品名称 01": "المنتج 01", "产品名称 02": "المنتج 02", "产品名称 03": "المنتج 03", "产品名称 04": "المنتج 04", "产品名称 05": "المنتج 05", "产品名称 06": "المنتج 06", "一句话卖点占位：用一句话说清这件产品好在哪。": "سطر مؤقت: اشرح في جملة واحدة ما يميز هذا المنتج.", "一句话卖点占位：材质 / 功能 / 场景，挑一个最打动人的点。": "سطر مؤقت: المادة أو الوظيفة أو الاستخدام — اختر الأقوى.", "一句话卖点占位：突出差异化，别写客套话。": "سطر مؤقت: أبرز ما يجعله مختلفاً. بلا كلام عام.", "一句话卖点占位：说清给谁用、解决什么问题。": "سطر مؤقت: لمن؟ وما المشكلة التي يحلها؟", "一句话卖点占位：把参数留到详情页，这里只讲感受。": "سطر مؤقت: اترك المواصفات لصفحة التفاصيل.", "一句话卖点占位：新品预告位。": "سطر مؤقت: تشويق للإصدار القادم.", "¥ —— <small>起</small>": "¥ —— <small>من</small>", "了解详情 →": "التفاصيل ←", "敬请期待": "قريباً", "为什么选择我们": "لماذا تختارنا", "体量小有体量小的好处 —— 灵活、专注、每一单都当回事。": "الصغر ميزة — مرونة وتركيز، وكل طلب مهم.", "源头直供": "مباشرة من المصدر", "减少中间环节，同等品质价格更实在。": "وسطاء أقل: نفس الجودة بسعر أفضل.", "用心选品": "اختيار بعناية", "每一件产品都亲自把关，不好不推。": "نفحص كل منتج بأنفسنا. إن لم يكن جيداً لا نبيعه.", "灵活定制": "تخصيص مرن", "支持小批量与定制需求，起步阶段更好谈。": "نرحب بالكميات الصغيرة والطلبات الخاصة.", "一对一服务": "خدمة فردية", "有问题直接找人，不踢皮球不敷衍。": "تواصل مع شخص حقيقي، بلا مماطلة.", "品牌故事": "قصتنا", "「不想着做大，<br>只想着做好。」": "«لا نريد أن نكبر،<br>نريد أن نتقن.»", "丁创世是一个刚刚起步的品牌。没有华丽的履历，也没有宏大的故事 —— 我们相信，产品本身才是最好的名片。": "DingCreate علامة في بدايتها. بلا سجل لامع وبلا قصة ضخمة — نؤمن أن المنتج نفسه هو أفضل بطاقة تعريف.", "所以我们把精力放在最实在的地方：找到靠谱的货源、把品质盯住、把服务做细。第一件产品做扎实了，第二件才有意义。": "لذلك نركّز على الأهم: مصدر موثوق، ورقابة على الجودة، وخدمة متقنة. عندما يكون المنتج الأول متيناً يصبح للثاني معنى.", "如果你也认同「产品说话」，欢迎一起聊聊。": "إن كنت تؤمن أيضاً أن المنتج هو الذي يتحدث، فمرحباً بالحديث.", "—— 丁创世": "— DingCreate", "聊聊你的需求": "أخبرنا بما تحتاجه", "<b>邮箱</b>hello@dingnew.com": "<b>البريد</b>hello@dingnew.com", "<b>微信</b>dingnew（待填）": "<b>وي تشات</b>dingnew (يُملأ لاحقاً)", "<b>电话</b>+86 ——（待填）": "<b>الهاتف</b>+86 —— (يُملأ لاحقاً)", "<b>地址</b>——（待填）": "<b>العنوان</b>—— (يُملأ لاحقاً)", "<b>我们的 App</b>": "<b>تطبيقاتنا</b>", "Mobile China · Android 下载 ↓": "Mobile China · تحميل أندرويد ↓", "China Agent · Android 下载 ↓": "China Agent · تحميل أندرويد ↓", "发送 →": "إرسال ←", "© 2026 丁创世 DingCreate · 保留所有权利": "© 2026 DingCreate · جميع الحقوق محفوظة", "@您的称呼": "الاسم", "@联系方式（微信/电话）": "التواصل (وي تشات / هاتف)", "@邮箱（选填）": "البريد (اختياري)", "@想了解什么产品？或说说你的需求…": "ما المنتج الذي يهمك؟ أو أخبرنا بما تحتاجه…", "已收到 ✓（演示）": "تم الاستلام ✓ (تجريبي)", "Mobile China 下载": "تحميل Mobile China", "China Agent 下载": "تحميل China Agent", "图 01": "صورة 01", "图 02": "صورة 02", "图 03": "صورة 03", "图 04": "صورة 04", "图 05": "صورة 05", "图 06": "صورة 06", "App": "التطبيقات", "我们的 App": "تطبيقاتنا", "手机端小工具，Android 直接下载安装。": "تطبيقات صغيرة للهاتف — تحميل وتثبيت مباشر على أندرويد.", "看中国手机品牌与机型的小工具。": "دليل مختصر لعلامات الهواتف الصينية وموديلاتها.", "与中国做生意的小助手。": "مساعد صغير للتعامل التجاري مع الصين.", "Android 下载 ↓": "تحميل أندرويد ↓", "Web": "المواقع", "我的站点": "مواقعنا", "我自己做的一堆网站，随手列在这儿。": "مجموعة من المواقع التي بنيتها — مُدرجة هنا للسهولة.", "访问 →": "زيارة ←", "看看我们的 App →": "شاهد تطبيقاتنا ←"}};
+/* ===== i18n：默认英文；可切中文 / 阿拉伯 ===== */
+const ORIG = new Map();
+const PH = new Map();
+const CHANGED = new Map();
+document.querySelectorAll('body *').forEach(el=>{
+  if(el.tagName==='SCRIPT'||el.tagName==='STYLE')return;
+  ORIG.set(el, el.innerHTML);
+  if(el.hasAttribute('placeholder')) PH.set(el, el.getAttribute('placeholder'));
 });
+const TITLE0 = document.title;
+function restoreAll(){
+  CHANGED.forEach((orig,el)=>{ try{ el.innerHTML = orig; }catch(e){} });
+  CHANGED.clear();
+  PH.forEach((orig,el)=>{ try{ el.setAttribute('placeholder', orig); }catch(e){} });
+}
+function setLang(l){
+  document.documentElement.lang = l==='zh' ? 'zh-CN' : (l==='ar' ? 'ar' : 'en');
+  document.documentElement.dir  = l==='ar' ? 'rtl' : 'ltr';
+  restoreAll();
+  const d = (l==='zh') ? null : (T[l] || {});
+  if(d){
+    ORIG.forEach((o,el)=>{
+      const key = (o||'').trim();
+      if(!key) return;
+      const v = d[key];
+      if(v===undefined || v===null) return;
+      if(!CHANGED.has(el)) CHANGED.set(el, o);
+      try{ el.innerHTML = v; }catch(e){}
+    });
+    PH.forEach((o,el)=>{
+      const v = d['@'+o];
+      if(v) el.setAttribute('placeholder', v);
+    });
+    document.title = (l==='ar') ? 'DingCreate · منتجات تستحق أن تُرى' : 'DingCreate · Good products deserve to be seen';
+  } else {
+    document.title = TITLE0;
+  }
+  const _sel = document.getElementById('langSel');
+  if(_sel) _sel.value = l;
+  try{ localStorage.setItem('dn_lang', l); }catch(e){}
+}
+(function(){ const s=document.getElementById('langSel'); if(s) s.onchange=()=>setLang(s.value); })();
+setLang((function(){
+  try{
+    const u=new URLSearchParams(location.search).get('lang');
+    if(u==='zh'||u==='ar'||u==='en') return u;
+    return localStorage.getItem('dn_lang')||'en';
+  }catch(e){ return 'en'; }
+})());
 </script>
-
-<div class="help-modal" id="helpModal">
-  <div class="help-box">
-    <button class="help-close" onclick="closeHelp()">&#10005;</button>
-    <h3>Help</h3>
-    <form id="helpForm" onsubmit="sendHelp(event);return false;">
-      <input type="hidden" name="_subject" value="Help - chinamobile.uk">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="text" name="name" placeholder="Name *">
-      <input type="email" name="email" placeholder="Email *">
-      <textarea name="message" required placeholder="How can I help?"></textarea>
-      <button class="hsend" type="submit">Send</button>
-    </form>
-    <div id="helpDone">&#10004; Thanks! Your message has been sent.</div>
-  </div>
-</div>
-<script>
-function openHelp(){document.getElementById('helpModal').style.display='flex';}
-function closeHelp(){document.getElementById('helpModal').style.display='none';}
-async function sendHelp(e){e.preventDefault();var f=document.getElementById('helpForm');var btn=f.querySelector('.hsend');btn.textContent='Sending\u2026';var name=(f.name?f.name.value:'').trim();var em=(f.email?f.email.value:'').trim();var msg=(f.message?f.message.value:'').trim();if(!msg){btn.textContent='Send';alert('Please enter a message.');return;}var _nm=document.getElementById('mn')||document.querySelector('input[type=text][name=name]')||document.querySelector('input[type=text]');var _em=document.getElementById('me')||document.querySelector('input[type=email]');if(_nm&&!_nm.value.trim()){btn.textContent='Send';alert('Please enter your name.');_nm.focus();return;}if(_em&&!_em.value.trim()){btn.textContent='Send';alert('Please enter your email.');_em.focus();return;}var txt='\uD83D\uDCAC Help \u2014 '+new Date().toLocaleString()+'\nName: '+name+'\nEmail: '+em+'\nMessage: '+msg;try{var r=await fetch('https://elrsrrvvuhfbkmxnvtod.supabase.co/rest/v1/messages',{method:'POST',headers:{apikey:'sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6',Authorization:'Bearer sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6','Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({device_id:'website:chinamobile.uk',text:txt})});if(!r.ok)throw new Error(r.status);document.getElementById('helpForm').style.display='none';document.getElementById('helpDone').style.display='block';}catch(err){btn.textContent='Send';alert('Failed to send. Please try again.');}}
-</script>
-
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "532314afab1a4c4997e617ad6c300ff7"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
