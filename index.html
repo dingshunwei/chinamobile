@@ -495,6 +495,20 @@ function sbRender(){
     box.innerHTML = list.map(sbCard).join('');
   });
   try { renderDoc(); } catch(e) { console.warn('文档渲染失败', e); }
+  try {
+    const cDoc = (window.SB_DOC && window.SB_DOC.sections || []).filter(function(s){ return s && s.kind === 'contact'; })[0];
+    const cEl = document.getElementById('contact');
+    if (cEl) {
+      if (!cDoc || cDoc.visible === false) { cEl.style.display = 'none'; }
+      else {
+        cEl.style.display = '';
+        const tg = _tri(cDoc.tag), tt = _tri(cDoc.title), sb = _tri(cDoc.sub);
+        const tgEl = cEl.querySelector('.tag'), h2El = cEl.querySelector('.h2');
+        if (tgEl && tg) tgEl.innerHTML = tg;
+        if (h2El && tt) h2El.innerHTML = tt;
+      }
+    }
+  } catch(e) { console.warn('联系区处理失败', e); }
   const navOrder = (d.nav || []).filter(function(n){ return n.visible !== false; });
   function buildLinks(){
     return navOrder.map(function(n){
