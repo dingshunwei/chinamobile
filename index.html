@@ -37,6 +37,10 @@ header.solid{background:rgba(247,244,238,.88);backdrop-filter:blur(16px);border-
 /* 防闪烁：有 JS 时先不显示，等数据渲染完再淡入（无 JS 直接显示） */
 html.js body{opacity:0;transition:opacity .25s ease}
 html.js body.ready{opacity:1}
+/* 写死的残留：一开始就藏掉，等 JS 渲染出新的（不再"先显示再消退"） */
+html.js > body > section.hero{display:none !important}
+html.js > body > .marq{display:none !important}
+html.js body > .marq{display:none !important}
 /* --- 手机端导航（汉堡）--- */
 .burger{display:none;background:none;border:0;font-size:22px;line-height:1;cursor:pointer;color:var(--ink);padding:2px 6px}
 .mnav{display:none;margin-top:74px;background:#fff;border-bottom:1px solid rgba(0,0,0,.08);box-shadow:0 12px 24px rgba(0,0,0,.06)}
