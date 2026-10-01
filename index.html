@@ -535,6 +535,29 @@ function _blk(b){
       + (link?'<p style="margin-top:12px"><a href="'+link+'" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">'+_btnLabel(link,_dl())+'</a></p>':'')
       + '</div></div>';
   }
+  if(t==='buttons'){
+    const bs=(b.buttons||[]);
+    return '<div class="wrap"><div class="cta reveal in" style="padding:0 0 8px">'+bs.map(function(x){
+      const lk=(x.link||'').trim();
+      const cls = lk.startsWith('#') ? 'btn gho' : 'btn pri';
+      return '<a class="'+cls+'" href="'+(lk||'#')+'">'+_tri(x.text)+'</a>';
+    }).join('')+'</div></div>';
+  }
+  if(t==='trust'){
+    return '<div class="wrap"><div class="trust reveal in" style="padding:0 0 10px">'+(b.trust||[]).map(function(x){
+      return '<span>'+_tri(x)+'</span>';
+    }).join('')+'</div></div>';
+  }
+  if(t==='badges'){
+    return '<div class="wrap"><div style="display:flex;gap:12px;flex-wrap:wrap;padding:0 0 12px">'+(b.badges||[]).map(function(x){
+      return '<div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:12.5px;font-weight:600">'+_tri(x)+'</div>';
+    }).join('')+'</div></div>';
+  }
+  if(t==='marquee'){
+    return '<div class="marq"><div>'+(b.marquee||[]).map(function(x){
+      return '<span>'+_tri(x)+'</span><i>✦</i>';
+    }).join('')+'</div></div>';
+  }
   if(t==='cards'){
     const cs=(b.cards||[]);
     return '<div class="wrap"><div class="why-grid">'+cs.map(function(c){
@@ -560,6 +583,10 @@ function _setText(sel, v){ const el=document.querySelector(sel); if(el && v!==un
 function renderDoc(){
   const d=SB_DOC2; if(!d) return;
   // 首屏（现在它也是一个导航项 kind='hero'）
+  // 首屏现在也由 #sections 里的 kind='hero' 项渲染 → 写死那块直接藏掉
+  const _hs=document.querySelector('section.hero'); if(_hs) _hs.style.display='none';
+  const _mq=document.querySelector('.marq'); if(_mq && _mq.parentElement && _mq.parentElement.tagName!=='SECTION') _mq.style.display='none';
+  const _sec=document.getElementById('sections'); if(_sec) _sec.style.paddingTop='96px';
   const hIt=(d.items||[]).filter(function(it){ return it && it.kind==='hero'; })[0];
   const hb=(hIt && hIt.blocks) || [];
   function _hb(t){ return hb.filter(function(b){ return b && b.type===t; })[0] || null; }
@@ -579,7 +606,7 @@ function renderDoc(){
   if (mqB && mqs.length) { const ms=mqB.marquee||[]; for (let i=0;i<mqs.length;i++){ const v=_tri(ms[i%3]); if(v) mqs[i].innerHTML=v; } }
   // 版块
   const box=document.getElementById('sections');
-  if(box){ const secs=(d.items||[]).filter(function(it){ return it && it.visible!==false && it.kind==='section'; });
+  if(box){ const secs=(d.items||[]).filter(function(it){ return it && it.visible!==false && it.kind!=='contact'; });
     box.innerHTML=secs.map(_item).join(''); }
   // 联系区（表单写死，这里只换标签/标题/副标题/四行联系方式）
   const cIt=(d.items||[]).filter(function(it){ return it && it.kind==='contact'; })[0];
