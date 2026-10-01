@@ -527,7 +527,16 @@ function sbRender(){
 
 /* ===== 按「页面文档 v2」渲染（一个导航项 = 一篇内容，里面是内容块）===== */
 function _tri(o){ if(!o) return ''; const l=sbLang(); return o[l] || o.en || o.zh || ''; }
-function _btnLabel(link, dl){ return /\\.(apk|ipa)(\\?|$)/i.test(link||'') ? (dl[0]||'Android 下载 ↓') : (dl[1]||'访问 →'); }
+function _asText(v, fb){
+  if (v == null) return fb;
+  if (typeof v === 'string') return v || fb;
+  const t = _tri(v);
+  return t || fb;
+}
+function _btnLabel(link, dl){
+  const isDl = /\\.(apk|ipa)(\\?|$)/i.test(link||'');
+  return isDl ? _asText(dl[0], 'Android 下载 ↓') : _asText(dl[1], '访问 →');
+}
 function _dl(){ return (SB_DOC2 && SB_DOC2.footer && SB_DOC2.footer.dl) || ['', '']; }
 function _blk(b){
   const t=''+b.type;
