@@ -34,6 +34,9 @@ header.solid{background:rgba(247,244,238,.88);backdrop-filter:blur(16px);border-
 .nav ul a:hover{color:var(--ink)}.nav ul a:hover::after{width:100%}
 .lang{font-size:12.5px;font-weight:600;color:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:5px 13px;cursor:pointer;transition:.3s}
 .lang:hover{background:var(--accent);color:#fff}
+/* 防闪烁：有 JS 时先不显示，等数据渲染完再淡入（无 JS 直接显示） */
+html.js body{opacity:0;transition:opacity .25s ease}
+html.js body.ready{opacity:1}
 /* --- 手机端导航（汉堡）--- */
 .burger{display:none;background:none;border:0;font-size:22px;line-height:1;cursor:pointer;color:var(--ink);padding:2px 6px}
 .mnav{display:none;margin-top:74px;background:#fff;border-bottom:1px solid rgba(0,0,0,.08);box-shadow:0 12px 24px rgba(0,0,0,.06)}
@@ -495,6 +498,7 @@ function sbRender(){
     box.innerHTML = list.map(sbCard).join('');
   });
   try { renderDoc(); } catch(e) { console.warn('文档渲染失败', e); }
+  document.body.classList.add('ready');
 
   const navOrder = (d.nav || []).filter(function(n){ return n.visible !== false; });
   function buildLinks(){
@@ -516,6 +520,8 @@ function sbRender(){
     window.__SB = { nav: res[0], items: res[1], set: res[2] };
     sbRender();
   }).catch(function(e){ console.warn('动态内容读取失败，保留静态内容', e); });
+  // 兜底：最多藏 1.5 秒，避免网络慢时白屏
+  setTimeout(function(){ document.body.classList.add('ready'); }, 1500);
 })();
 
 
