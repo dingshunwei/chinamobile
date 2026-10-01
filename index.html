@@ -581,9 +581,13 @@ function _item(it){
   const tag=_tri(it.tag), title=_tri(it.title), sub=_tri(it.sub);
   const body=(it.blocks||[]).filter(function(b){ return b && (b.type!=='cards' || (b.cards||[]).length); }).map(_blk).join('');
   if(!body) return '';
-  return '<section id="'+it.key+'"><div class="wrap"><div class="sec-top reveal in"><div>'
-       + (tag?'<span class="tag">'+tag+'</span>':'') + '<h2 class="h2">'+title+'</h2>'
-       + (sub?'<p class="sub">'+sub+'</p>':'') + '</div></div></div>' + body + '</section>';
+  const head = (tag||title||sub)
+    ? ('<div class="wrap"><div class="sec-top reveal in"><div>'
+       + (tag?'<span class="tag">'+tag+'</span>':'')
+       + (title?'<h2 class="h2">'+title+'</h2>':'')
+       + (sub?'<p class="sub">'+sub+'</p>':'') + '</div></div></div>')
+    : '';
+  return '<section id="'+it.key+'">' + head + body + '</section>';
 }
 function _setText(sel, v){ const el=document.querySelector(sel); if(el && v!==undefined && v!==null) el.innerHTML=v; }
 function renderDoc(){
