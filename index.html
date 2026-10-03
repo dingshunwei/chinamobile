@@ -157,6 +157,8 @@ section{padding:110px 0}
 .c-grid .h2{margin-bottom:18px}
 .c-info p{display:flex;gap:14px;font-size:15px;color:var(--ink2);margin-bottom:15px}
 .c-info p b{color:var(--accent);font-weight:700;min-width:58px}
+.c-info p .dlpill{display:inline-block;padding:6px 15px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-weight:600;font-size:13.5px;line-height:1;text-decoration:none;white-space:nowrap;transition:background .18s,color .18s}
+.c-info p .dlpill:hover,.c-info p .dlpill:active{background:var(--accent);color:#fff}
 form{display:grid;gap:15px}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 input,textarea{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:15px 16px;font-family:var(--disp);font-size:14.5px;color:var(--ink);transition:.25s}
@@ -365,8 +367,8 @@ footer a:hover{color:var(--accent)}
         </div>
         <div class="c-info" style="margin-top:22px">
           <p><b>我们的 App</b></p>
-          <p><b style="min-width:110px">Mobile China</b><a href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk" style="color:var(--accent);font-weight:600;text-decoration:none">Android 下载 ↓</a><a href="https://apps.apple.com/app/mobile-china/id6807377172" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none">iOS App Store ↓</a></p>
-          <p><b style="min-width:110px">China Agent</b><a href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/china-agent-customer.apk" style="color:var(--accent);font-weight:600;text-decoration:none">Android 下载 ↓</a><a href="https://play.google.com/store/apps/details?id=com.chinaagent" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none">Google Play ↓</a></p>
+          <p style="flex-wrap:wrap;row-gap:8px"><b style="min-width:110px">Mobile China</b><a class="dlpill" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk">Android 下载 ↓</a><a class="dlpill" href="https://apps.apple.com/app/mobile-china/id6807377172" target="_blank" rel="noopener">iOS App Store ↓</a></p>
+          <p style="flex-wrap:wrap;row-gap:8px"><b style="min-width:110px">China Agent</b><a class="dlpill" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/china-agent-customer.apk">Android 下载 ↓</a><a class="dlpill" href="https://play.google.com/store/apps/details?id=com.chinaagent" target="_blank" rel="noopener">Google Play ↓</a></p>
         </div>
       </div>
       <form class="reveal" id="cForm" onsubmit="sendWebContact(event);return false;">
