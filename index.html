@@ -369,10 +369,10 @@ footer a:hover{color:var(--accent)}
           <p><a href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/china-agent-customer.apk" style="color:var(--accent);font-weight:600">China Agent · Android 下载 ↓</a></p>
         </div>
       </div>
-      <form class="reveal" onsubmit="event.preventDefault();this.querySelector('button').textContent='已收到 ✓（演示）'">
-        <div class="f2"><input data-k-ph="f_name_ph" placeholder="您的称呼" required><input data-k-ph="f_contact_ph" placeholder="联系方式（微信/电话）"></div>
-        <input type="email" data-k-ph="f_email_ph" placeholder="邮箱（选填）">
-        <textarea data-k-ph="f_msg_ph" placeholder="想了解什么产品？或说说你的需求…"></textarea>
+      <form class="reveal" id="cForm" onsubmit="sendWebContact(event);return false;">
+        <div class="f2"><input id="cf_name" data-k-ph="f_name_ph" placeholder="您的称呼" required><input id="cf_contact" data-k-ph="f_contact_ph" placeholder="联系方式（微信/电话）"></div>
+        <input id="cf_email" type="email" data-k-ph="f_email_ph" placeholder="邮箱（选填）">
+        <textarea id="cf_msg" data-k-ph="f_msg_ph" placeholder="想了解什么产品？或说说你的需求…"></textarea>
         <button data-k="f_send" class="btn pri" type="submit">发送 →</button>
       </form>
     </div>
@@ -444,6 +444,34 @@ function setLang(l){
 const SB_URL = 'https://elrsrrvvuhfbkmxnvtod.supabase.co';
 const SB_KEY = 'sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
 const SB_HDR = { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY };
+
+/* ===== 官网联系表单：POST 到 Cloudflare Worker（密钥在服务端 + 限流，页面不放密钥）=====
+   留言落进 Supabase inquiries 表 → 作者端后台「询盘」页查看；不写共用的 messages 表。 */
+const WEB_API = 'https://api.agentchina.uk';
+async function sendWebContact(e){
+  e.preventDefault();
+  var f=document.getElementById('cForm'); if(!f) return;
+  var btn=f.querySelector('button');
+  var g=function(id){var n=document.getElementById(id);return n?n.value.trim():'';};
+  var name=g('cf_name'), contact=g('cf_contact'), email=g('cf_email'), msg=g('cf_msg');
+  if(!name||!msg){ alert('请填写您的称呼和需求。'); return; }
+  var old=btn.textContent; btn.disabled=true; btn.textContent='发送中…';
+  try{
+    var r=await fetch(WEB_API+'/web-contact',{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({page:'chinamobile.uk',name:name,contact:contact,email:email,message:msg})});
+    if(!r.ok) throw new Error(r.status);
+    f.querySelectorAll('input,textarea').forEach(function(i){i.value='';i.disabled=true;});
+    btn.textContent='已收到 ✓';
+    var done=document.createElement('p');
+    done.textContent='已收到 ✓ 我们会尽快联系你';
+    done.style.cssText='color:#1a9d55;font-weight:700;margin-top:10px';
+    f.appendChild(done);
+  }catch(err){
+    btn.disabled=false; btn.textContent=old;
+    alert('发送失败，请稍后再试。');
+  }
+}
 window.__SB = null;
 var SB_DOC = null;
 var SB_DOC2 = null;
