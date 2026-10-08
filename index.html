@@ -309,12 +309,14 @@ footer a:hover{color:var(--accent)}
         <h3>Mobile China</h3>
         <p>看中国手机品牌与机型的小工具。</p>
         <p style="margin-top:14px"><a data-k="btn_dl" class="btn pri" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk">Android 下载 ↓</a></p>
+        <p style="margin-top:8px"><a href="https://apps.apple.com/app/mobile-china/id6807377172" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">iOS App Store ↓</a></p>
       </div>
       <div class="why reveal">
         <div class="n">02</div>
         <h3>China Agent</h3>
         <p>与中国做生意的小助手。</p>
         <p style="margin-top:14px"><a data-k="btn_dl" class="btn pri" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/china-agent-customer.apk">Android 下载 ↓</a></p>
+        <p style="margin-top:8px"><a href="https://play.google.com/store/apps/details?id=com.chinaagent" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">Google Play ↓</a></p>
       </div>
     </div>
   </div>
@@ -362,15 +364,11 @@ footer a:hover{color:var(--accent)}
         <div class="c-info">
           <p data-k="c_email"><b>邮箱</b>zhansuit@qq.com</p>
           <p data-k="c_wechat"><b>微信</b>dingnew（待填）</p>
+          <p><b>WhatsApp</b><a href="https://wa.me/8615317127838" target="_blank" rel="noopener">+86 153 1712 7838</a></p>
           <p data-k="c_phone"><b>电话</b>+86 ——（待填）</p>
           <p data-k="c_address"><b>地址</b>——（待填）</p>
         </div>
-        <div class="c-info" style="margin-top:22px">
-          <p><b>我们的 App</b></p>
-          <p style="flex-wrap:wrap;row-gap:8px"><b style="min-width:110px">Mobile China</b><a class="dlpill" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/diary-customer-phone.apk">Android 下载 ↓</a><a class="dlpill" href="https://apps.apple.com/app/mobile-china/id6807377172" target="_blank" rel="noopener">iOS App Store ↓</a></p>
-          <p style="flex-wrap:wrap;row-gap:8px"><b style="min-width:110px">China Agent</b><a class="dlpill" href="https://ujnvwdjrlijzzmzxwwxk.supabase.co/storage/v1/object/public/lsdiary/china-agent-customer.apk">Android 下载 ↓</a><a class="dlpill" href="https://play.google.com/store/apps/details?id=com.chinaagent" target="_blank" rel="noopener">Google Play ↓</a></p>
-        </div>
-      </div>
+        
       <form class="reveal" id="cForm" onsubmit="sendWebContact(event);return false;">
         <div class="f2"><input id="cf_name" data-k-ph="f_name_ph" placeholder="您的称呼" required><input id="cf_contact" data-k-ph="f_contact_ph" placeholder="联系方式（微信/电话）"></div>
         <input id="cf_email" type="email" data-k-ph="f_email_ph" placeholder="邮箱（选填）">
@@ -446,6 +444,12 @@ function setLang(l){
 const SB_URL = 'https://elrsrrvvuhfbkmxnvtod.supabase.co';
 const SB_KEY = 'sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
 const SB_HDR = { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY };
+/* 联系区固定补充：WhatsApp
+   · 显示用 +86 153 1712 7838（标准国际格式，带 + 更清楚）
+   · 链接必须用纯数字 —— wa.me 规定不能带 + 号/空格，否则打不开 */
+const WA_DISPLAY = '+86 153 1712 7838';
+const WA_LINK = 'https://wa.me/8615317127838';
+const WA_ROW = '<p><b>WhatsApp</b><a href="'+WA_LINK+'" target="_blank" rel="noopener">'+WA_DISPLAY+'</a></p>';
 
 /* ===== 官网联系表单：POST 到 Cloudflare Worker（密钥在服务端 + 限流，页面不放密钥）=====
    留言落进 Supabase inquiries 表 → 作者端后台「询盘」页查看；不写共用的 messages 表。 */
@@ -563,6 +567,7 @@ function sbRender(){
     box.innerHTML = list.map(sbCard).join('');
   });
   try { renderDoc(); } catch(e) { console.warn('文档渲染失败', e); }
+  try { sbExtraAppLinks(); } catch(e) {}
   document.body.classList.add('ready');
 
   const navOrder = (d.nav || []).filter(function(n){ return n.visible !== false; });
@@ -657,6 +662,25 @@ function _blk(b){
   }
   return '';
 }
+/* App 板块：每张卡片下面补上第二个下载入口（iOS App Store / Google Play）
+   说明：安卓 APK 按钮由后台数据渲染，iOS/Google Play 这两个链接以前放在联系区，
+   现在按要求挪到 App 板块卡片下面 */
+function sbExtraAppLinks(){
+  const grid=document.querySelector('#apps .why-grid'); if(!grid) return;
+  const extras={
+    'Mobile China':{t:'iOS App Store ↓',u:'https://apps.apple.com/app/mobile-china/id6807377172'},
+    'China Agent':{t:'Google Play ↓',u:'https://play.google.com/store/apps/details?id=com.chinaagent'}
+  };
+  grid.querySelectorAll('.why').forEach(function(card){
+    const h=card.querySelector('h3'); if(!h) return;
+    const e=extras[(h.textContent||'').trim()]; if(!e) return;
+    if(card.querySelector('a.extra-dl')) return;
+    const p=document.createElement('p'); p.style.marginTop='8px';
+    p.innerHTML='<a class="extra-dl" href="'+e.u+'" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">'+e.t+'</a>';
+    card.appendChild(p);
+  });
+}
+
 function _item(it){
   const tag=_tri(it.tag), title=_tri(it.title), sub=_tri(it.sub);
   const body=(it.blocks||[]).filter(function(b){ return b && (b.type!=='cards' || (b.cards||[]).length); }).map(_blk).join('');
@@ -708,8 +732,9 @@ function renderDoc(){
       _setText('#contact .tag', _tri(cIt.tag)); _setText('#contact .h2', _tri(cIt.title));
       const info=cEl.querySelector('.c-info');
       const fb=(cIt.blocks||[]).filter(function(b){ return b && b.type==='fields'; })[0];
-      if(info && fb){ info.innerHTML=(fb.fields||[]).map(function(f){
-        return '<p><b>'+_tri(f.label)+'</b>'+_tri(f.value)+'</p>'; }).join(''); }
+      /* 后台字段 + 固定的 WhatsApp 行（后台没有该字段，所以在这里补） */
+      if(info){ info.innerHTML=(fb?(fb.fields||[]).map(function(f){
+        return '<p><b>'+_tri(f.label)+'</b>'+_tri(f.value)+'</p>'; }).join(''):'') + WA_ROW; }
     }
   }
   // 品牌 / 页脚
